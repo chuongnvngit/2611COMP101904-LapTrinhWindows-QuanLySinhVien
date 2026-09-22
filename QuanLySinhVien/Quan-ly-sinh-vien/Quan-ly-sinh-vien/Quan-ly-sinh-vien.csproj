@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +47,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\KetQuaBLL.cs" />
+    <Compile Include="BLL\KhoaBLL.cs" />
+    <Compile Include="BLL\LopBLL.cs" />
+    <Compile Include="BLL\MonHocBLL.cs" />
+    <Compile Include="BLL\SinhVienBLL.cs" />
+    <Compile Include="BLL\TaiKhoanBLL.cs" />
+    <Compile Include="DAL\Database.cs" />
+    <Compile Include="DAL\KetQuaDAL.cs" />
+    <Compile Include="DAL\KhoaDAL.cs" />
+    <Compile Include="DAL\LopDAL.cs" />
+    <Compile Include="DAL\MonHocDAL.cs" />
+    <Compile Include="DAL\SinhVienDAL.cs" />
+    <Compile Include="DAL\TaiKhoanDAL.cs" />
+    <Compile Include="DTO\KetQuaDTO.cs" />
+    <Compile Include="DTO\KhoaDTO.cs" />
+    <Compile Include="DTO\LopDTO.cs" />
+    <Compile Include="DTO\MonHocDTO.cs" />
+    <Compile Include="DTO\SinhVienDTO.cs" />
+    <Compile Include="DTO\TaiKhoanDTO.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,5 +96,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database.sql" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
