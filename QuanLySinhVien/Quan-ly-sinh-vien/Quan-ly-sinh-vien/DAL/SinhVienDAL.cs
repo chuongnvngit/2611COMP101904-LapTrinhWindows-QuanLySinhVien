@@ -20,7 +20,7 @@ namespace Quan_ly_sinh_vien.DAL
 
         public DataTable TimKiem(string tuKhoa)
         {
-            string sql = @"SELECT sv.MaSV, sv.HoTen, sv.NgaySinh, sv.GioiTinh, sv.DiaChi, sv.HinhAnh, sv.MaLop, l.TenLop, k.TenKhoa 
+            string sql = @"SELECT sv.MaSV, sv.HoTen, sv.NgaySinh, sv.GioiTinh, sv.DiaChi, sv.HinhAnh, sv.MaLop, l.TenLop, k.TenKhoa, l.KhoaHoc, k.MaKhoa
                    FROM SinhVien sv 
                    INNER JOIN Lop l ON sv.MaLop = l.MaLop 
                    INNER JOIN Khoa k ON l.MaKhoa = k.MaKhoa 
