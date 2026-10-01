@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using Quan_ly_sinh_vien.DAL;
 using Quan_ly_sinh_vien.DTO;
@@ -13,21 +9,25 @@ namespace Quan_ly_sinh_vien.BLL
     {
         private readonly LopDAL dal = new LopDAL();
 
+        // =========================================================
+        // LẤY DANH SÁCH LỚP
+        // =========================================================
         public DataTable LayDanhSach()
         {
             return dal.LayTatCa();
         }
 
+        // =========================================================
+        // LẤY LỚP THEO KHOA
+        // =========================================================
         public DataTable LayTheoKhoa(string maKhoa)
         {
             return dal.LayTheoKhoa(maKhoa);
         }
 
-        public DataTable LayDanhSachKhoaHoc()
-        {
-            return dal.LayDanhSachKhoaHoc();
-        }
-
+        // =========================================================
+        // THÊM LỚP
+        // =========================================================
         public bool Them(LopDTO l)
         {
             if (l == null)
@@ -43,11 +43,15 @@ namespace Quan_ly_sinh_vien.BLL
                 throw new Exception("Vui lòng chọn khoa trực thuộc!");
 
             if (dal.KiemTraTrungMa(l.MaLop.Trim()))
-                throw new Exception($"Mã lớp '{l.MaLop}' đã tồn tại!");
+                throw new Exception(
+                    $"Mã lớp '{l.MaLop}' đã tồn tại!");
 
             return dal.Them(l);
         }
 
+        // =========================================================
+        // CẬP NHẬT LỚP
+        // =========================================================
         public bool CapNhat(LopDTO l)
         {
             if (l == null)
@@ -65,10 +69,14 @@ namespace Quan_ly_sinh_vien.BLL
             return dal.CapNhat(l);
         }
 
+        // =========================================================
+        // XÓA LỚP
+        // =========================================================
         public bool Xoa(string maLop)
         {
             if (string.IsNullOrWhiteSpace(maLop))
-                throw new Exception("Vui lòng chọn mã lớp cần xóa!");
+                throw new Exception(
+                    "Vui lòng chọn mã lớp cần xóa!");
 
             try
             {
@@ -77,8 +85,7 @@ namespace Quan_ly_sinh_vien.BLL
             catch
             {
                 throw new Exception(
-                    "Không thể xóa lớp này do đang có sinh viên theo học!"
-                );
+                    "Không thể xóa lớp này do đang có sinh viên theo học!");
             }
         }
     }
