@@ -14,11 +14,12 @@ namespace Quan_ly_sinh_vien.DTO
         public string GioiTinh { get; set; }
         public string DiaChi { get; set; }
         public string HinhAnh { get; set; }
+        public string MaKhoa { get; set; }
         public string MaLop { get; set; }
 
         public SinhVienDTO() { }
 
-        public SinhVienDTO(string maSV, string hoTen, DateTime ngaySinh, string gioiTinh, string diaChi, string hinhAnh, string maLop)
+        public SinhVienDTO(string maSV, string hoTen, DateTime ngaySinh, string gioiTinh, string diaChi, string hinhAnh, string maLop, string maKhoa)
         {
             MaSV = maSV;
             HoTen = hoTen;
@@ -27,6 +28,7 @@ namespace Quan_ly_sinh_vien.DTO
             DiaChi = diaChi;
             HinhAnh = hinhAnh;
             MaLop = maLop;
+            MaKhoa = maKhoa;
         }
     }
 }
