@@ -35,7 +35,7 @@ namespace Quan_ly_sinh_vien
                 cboKhoaHoc.Items.Add("K48");
                 cboKhoaHoc.Items.Add("K49");
                 cboKhoaHoc.Items.Add("K50");
-
+                cboKhoaHoc.Items.Add("K51");
                 // Đổ dữ liệu Khoa
                 cboKhoa.DisplayMember = "TenKhoa";
                 cboKhoa.ValueMember = "MaKhoa";
@@ -48,6 +48,9 @@ namespace Quan_ly_sinh_vien
 
                 // Đổ dữ liệu Sinh Viên
                 dgvSinhVien.DataSource = sinhVienBLL.LayDanhSach();
+                cboKhoa.SelectedIndex = -1;
+                cboLop.SelectedIndex = -1;
+                cboKhoaHoc.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
