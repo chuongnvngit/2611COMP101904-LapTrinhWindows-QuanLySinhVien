@@ -157,6 +157,15 @@ namespace Quan_ly_sinh_vien
 
             if (result == DialogResult.Yes)
             {
+                // 1. Quét và đóng toàn bộ các Form con (MdiChildren) đang mở
+                // Giúp giải phóng hoàn toàn bộ nhớ và ngắt các kết nối CSDL đang bị treo
+                foreach (Form child in this.MdiChildren)
+                {
+                    child.Close();
+                    child.Dispose(); // Xóa sổ hoàn toàn form cũ
+                }
+
+                // 2. Đóng Form Main để quay về màn hình Đăng nhập
                 this.Close();
             }
         }
@@ -241,21 +250,17 @@ namespace Quan_ly_sinh_vien
         // =========================================================
         private void btnSinhVien_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Chức năng Quản lý Sinh viên đang được xây dựng.",
-                "Quản lý Sinh viên",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            // Đã thay thế MessageBox bằng hàm gọi Form Sinh Viên
+            MoForm(new FrmSinhVien());
         }
 
         private void menuSinhVien_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Chức năng Quản lý Sinh viên đang được xây dựng.",
-                "Quản lý Sinh viên",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            // Đã thay thế MessageBox bằng hàm gọi Form Sinh Viên
+            MoForm(new FrmSinhVien());
         }
+
+      
 
         // =========================================================
         // KẾT QUẢ
