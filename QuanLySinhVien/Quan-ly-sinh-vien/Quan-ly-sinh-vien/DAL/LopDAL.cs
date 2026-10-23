@@ -1,6 +1,7 @@
 ﻿using Quan_ly_sinh_vien.DTO;
 using System.Data;
 using System.Data.SqlClient;
+using System;
 
 namespace Quan_ly_sinh_vien.DAL
 {
@@ -16,7 +17,8 @@ namespace Quan_ly_sinh_vien.DAL
                     l.MaLop,
                     l.TenLop,
                     l.MaKhoa,
-                    k.TenKhoa
+                    k.TenKhoa,
+                    l.KhoaHoc   
                 FROM Lop l
                 INNER JOIN Khoa k 
                     ON l.MaKhoa = k.MaKhoa
@@ -34,7 +36,8 @@ namespace Quan_ly_sinh_vien.DAL
                 SELECT 
                     MaLop,
                     TenLop,
-                    MaKhoa
+                    MaKhoa,
+                    KhoaHoc
                 FROM Lop
                 WHERE MaKhoa = @MaKhoa
                 ORDER BY MaLop ASC";
@@ -57,20 +60,23 @@ namespace Quan_ly_sinh_vien.DAL
                 (
                     MaLop,
                     TenLop,
-                    MaKhoa
+                    MaKhoa,
+                    KhoaHoc
                 )
                 VALUES
                 (
                     @MaLop,
                     @TenLop,
-                    @MaKhoa
+                    @MaKhoa,
+                    @KhoaHoc
                 )";
 
             SqlParameter[] p =
             {
                 new SqlParameter("@MaLop", l.MaLop),
                 new SqlParameter("@TenLop", l.TenLop),
-                new SqlParameter("@MaKhoa", l.MaKhoa)
+                new SqlParameter("@MaKhoa", l.MaKhoa),
+                new SqlParameter("@KhoaHoc", string.IsNullOrEmpty(l.KhoaHoc) ? (object)DBNull.Value : l.KhoaHoc)
             };
 
             return Database.ExecuteNonQuery(sql, p) > 0;
@@ -85,14 +91,16 @@ namespace Quan_ly_sinh_vien.DAL
                 UPDATE Lop
                 SET
                     TenLop = @TenLop,
-                    MaKhoa = @MaKhoa
+                    MaKhoa = @MaKhoa,
+                    KhoaHoc = @KhoaHoc
                 WHERE MaLop = @MaLop";
 
             SqlParameter[] p =
             {
                 new SqlParameter("@MaLop", l.MaLop),
                 new SqlParameter("@TenLop", l.TenLop),
-                new SqlParameter("@MaKhoa", l.MaKhoa)
+                new SqlParameter("@MaKhoa", l.MaKhoa),
+                new SqlParameter("@KhoaHoc", string.IsNullOrEmpty(l.KhoaHoc) ? (object)DBNull.Value : l.KhoaHoc)
             };
 
             return Database.ExecuteNonQuery(sql, p) > 0;

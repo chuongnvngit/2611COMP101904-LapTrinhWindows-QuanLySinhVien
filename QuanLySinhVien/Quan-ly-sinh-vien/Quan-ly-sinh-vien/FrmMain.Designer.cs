@@ -2,15 +2,8 @@
 {
     partial class FrmMain
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,15 +15,11 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuHeThong = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTaoTaiKhoan = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDangXuat = new System.Windows.Forms.ToolStripMenuItem();
             this.menuThoat = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDanhMuc = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +39,8 @@
             this.btnLop = new System.Windows.Forms.ToolStripButton();
             this.btnMonHoc = new System.Windows.Forms.ToolStripButton();
             this.btnKetQua = new System.Windows.Forms.ToolStripButton();
+            this.btnHocPhi = new System.Windows.Forms.ToolStripButton();
+            this.btnTaoTaiKhoan = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.statusStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -72,23 +63,31 @@
             // menuHeThong
             // 
             this.menuHeThong.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuTaoTaiKhoan,
             this.menuDangXuat,
             this.menuThoat});
             this.menuHeThong.Name = "menuHeThong";
-            this.menuHeThong.Size = new System.Drawing.Size(85, 26);
+            this.menuHeThong.Size = new System.Drawing.Size(85, 24);
             this.menuHeThong.Text = "Hệ thống";
+            // 
+            // menuTaoTaiKhoan
+            // 
+            this.menuTaoTaiKhoan.Name = "menuTaoTaiKhoan";
+            this.menuTaoTaiKhoan.Size = new System.Drawing.Size(182, 26);
+            this.menuTaoTaiKhoan.Text = "Tạo tài khoản";
+            this.menuTaoTaiKhoan.Click += new System.EventHandler(this.menuTaoTaiKhoan_Click);
             // 
             // menuDangXuat
             // 
             this.menuDangXuat.Name = "menuDangXuat";
-            this.menuDangXuat.Size = new System.Drawing.Size(160, 26);
+            this.menuDangXuat.Size = new System.Drawing.Size(182, 26);
             this.menuDangXuat.Text = "Đăng xuất";
             this.menuDangXuat.Click += new System.EventHandler(this.menuDangXuat_Click);
             // 
             // menuThoat
             // 
             this.menuThoat.Name = "menuThoat";
-            this.menuThoat.Size = new System.Drawing.Size(160, 26);
+            this.menuThoat.Size = new System.Drawing.Size(182, 26);
             this.menuThoat.Text = "Thoát";
             this.menuThoat.Click += new System.EventHandler(this.menuThoat_Click);
             // 
@@ -99,7 +98,7 @@
             this.menuLop,
             this.menuMonHoc});
             this.menuDanhMuc.Name = "menuDanhMuc";
-            this.menuDanhMuc.Size = new System.Drawing.Size(94, 26);
+            this.menuDanhMuc.Size = new System.Drawing.Size(94, 24);
             this.menuDanhMuc.Text = "Danh mục ";
             // 
             // menuKhoa
@@ -128,7 +127,7 @@
             this.menuQuanLy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuSinhVien});
             this.menuQuanLy.Name = "menuQuanLy";
-            this.menuQuanLy.Size = new System.Drawing.Size(73, 26);
+            this.menuQuanLy.Size = new System.Drawing.Size(73, 24);
             this.menuQuanLy.Text = "Quản lý";
             // 
             // menuSinhVien
@@ -143,7 +142,7 @@
             this.menuKetQua.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuKetQuaHocTap});
             this.menuKetQua.Name = "menuKetQua";
-            this.menuKetQua.Size = new System.Drawing.Size(74, 26);
+            this.menuKetQua.Size = new System.Drawing.Size(74, 24);
             this.menuKetQua.Text = "Kết quả";
             this.menuKetQua.Click += new System.EventHandler(this.menuKetQua_Click);
             // 
@@ -180,7 +179,9 @@
             this.btnKhoa,
             this.btnLop,
             this.btnMonHoc,
-            this.btnKetQua});
+            this.btnKetQua,
+            this.btnHocPhi,
+            this.btnTaoTaiKhoan});
             this.toolStripMain.Location = new System.Drawing.Point(0, 28);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(800, 27);
@@ -190,7 +191,7 @@
             // btnTrangChu
             // 
             this.btnTrangChu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTrangChu.Image = ((System.Drawing.Image)(resources.GetObject("btnTrangChu.Image")));
+            this.btnTrangChu.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_Trangchu;
             this.btnTrangChu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTrangChu.Name = "btnTrangChu";
             this.btnTrangChu.Size = new System.Drawing.Size(29, 24);
@@ -200,57 +201,79 @@
             // btnSinhVien
             // 
             this.btnSinhVien.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSinhVien.Image = ((System.Drawing.Image)(resources.GetObject("btnSinhVien.Image")));
+            this.btnSinhVien.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_Sinhvien;
             this.btnSinhVien.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSinhVien.Name = "btnSinhVien";
-            this.btnSinhVien.Size = new System.Drawing.Size(29, 28);
-            this.btnSinhVien.Text = "Sinh viên ";
+            this.btnSinhVien.Size = new System.Drawing.Size(29, 24);
+            this.btnSinhVien.Text = "Sinh viên";
             this.btnSinhVien.Click += new System.EventHandler(this.btnSinhVien_Click);
             // 
             // btnKhoa
             // 
             this.btnKhoa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnKhoa.Image = ((System.Drawing.Image)(resources.GetObject("btnKhoa.Image")));
+            this.btnKhoa.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_Khoa;
             this.btnKhoa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnKhoa.Name = "btnKhoa";
-            this.btnKhoa.Size = new System.Drawing.Size(29, 28);
+            this.btnKhoa.Size = new System.Drawing.Size(29, 24);
             this.btnKhoa.Text = "Khoa";
             this.btnKhoa.Click += new System.EventHandler(this.btnKhoa_Click);
             // 
             // btnLop
             // 
             this.btnLop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLop.Image = ((System.Drawing.Image)(resources.GetObject("btnLop.Image")));
+            this.btnLop.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_Lop;
             this.btnLop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLop.Name = "btnLop";
-            this.btnLop.Size = new System.Drawing.Size(29, 28);
+            this.btnLop.Size = new System.Drawing.Size(29, 24);
             this.btnLop.Text = "Lớp";
             this.btnLop.Click += new System.EventHandler(this.btnLop_Click);
             // 
             // btnMonHoc
             // 
             this.btnMonHoc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMonHoc.Image = ((System.Drawing.Image)(resources.GetObject("btnMonHoc.Image")));
+            this.btnMonHoc.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_MonHoc;
             this.btnMonHoc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMonHoc.Name = "btnMonHoc";
-            this.btnMonHoc.Size = new System.Drawing.Size(29, 28);
+            this.btnMonHoc.Size = new System.Drawing.Size(29, 24);
             this.btnMonHoc.Text = "Môn học";
             this.btnMonHoc.Click += new System.EventHandler(this.btnMonHoc_Click);
             // 
             // btnKetQua
             // 
             this.btnKetQua.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnKetQua.Image = ((System.Drawing.Image)(resources.GetObject("btnKetQua.Image")));
+            this.btnKetQua.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_Ketqua;
             this.btnKetQua.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnKetQua.Name = "btnKetQua";
-            this.btnKetQua.Size = new System.Drawing.Size(29, 28);
+            this.btnKetQua.Size = new System.Drawing.Size(29, 24);
             this.btnKetQua.Text = "Kết quả";
             this.btnKetQua.Click += new System.EventHandler(this.btnKetQua_Click);
+            // 
+            // btnHocPhi
+            // 
+            this.btnHocPhi.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnHocPhi.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_Diem;
+            this.btnHocPhi.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnHocPhi.Name = "btnHocPhi";
+            this.btnHocPhi.Size = new System.Drawing.Size(29, 24);
+            this.btnHocPhi.Text = "Học phí";
+            this.btnHocPhi.Click += new System.EventHandler(this.btnHocPhi_Click);
+            // 
+            // btnTaoTaiKhoan
+            // 
+            this.btnTaoTaiKhoan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTaoTaiKhoan.Image = global::Quan_ly_sinh_vien.Properties.Resources.Icon_TaoTaiKhoan;
+            this.btnTaoTaiKhoan.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTaoTaiKhoan.Name = "btnTaoTaiKhoan";
+            this.btnTaoTaiKhoan.Size = new System.Drawing.Size(29, 28);
+            this.btnTaoTaiKhoan.Text = "Tạo tài khoản";
+            this.btnTaoTaiKhoan.Click += new System.EventHandler(this.menuTaoTaiKhoan_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Quan_ly_sinh_vien.Properties.Resources.hoc_phi_dai_hoc_su_pham_tphcm_anh_1;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.statusStripMain);
@@ -296,5 +319,8 @@
         private System.Windows.Forms.ToolStripButton btnLop;
         private System.Windows.Forms.ToolStripButton btnMonHoc;
         private System.Windows.Forms.ToolStripButton btnKetQua;
+        private System.Windows.Forms.ToolStripButton btnHocPhi;
+        private System.Windows.Forms.ToolStripMenuItem menuTaoTaiKhoan;
+        private System.Windows.Forms.ToolStripButton btnTaoTaiKhoan;
     }
 }

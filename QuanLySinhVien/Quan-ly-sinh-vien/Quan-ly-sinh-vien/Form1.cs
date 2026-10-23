@@ -16,5 +16,10 @@ namespace Quan_ly_sinh_vien
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

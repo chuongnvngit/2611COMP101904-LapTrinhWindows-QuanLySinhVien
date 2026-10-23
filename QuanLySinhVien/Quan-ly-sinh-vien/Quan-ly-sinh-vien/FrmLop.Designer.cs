@@ -135,12 +135,12 @@
             this.dgvLop.RowHeadersWidth = 51;
             this.dgvLop.RowTemplate.Height = 24;
             this.dgvLop.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLop.Size = new System.Drawing.Size(314, 161);
+            this.dgvLop.Size = new System.Drawing.Size(871, 334);
             this.dgvLop.TabIndex = 9;
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(130, 309);
+            this.btnThem.Location = new System.Drawing.Point(130, 428);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(75, 23);
             this.btnThem.TabIndex = 10;
@@ -149,7 +149,7 @@
             // 
             // btnCapNhat
             // 
-            this.btnCapNhat.Location = new System.Drawing.Point(256, 309);
+            this.btnCapNhat.Location = new System.Drawing.Point(256, 428);
             this.btnCapNhat.Name = "btnCapNhat";
             this.btnCapNhat.Size = new System.Drawing.Size(86, 23);
             this.btnCapNhat.TabIndex = 11;
@@ -158,7 +158,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(400, 309);
+            this.btnXoa.Location = new System.Drawing.Point(400, 428);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(86, 23);
             this.btnXoa.TabIndex = 12;
@@ -167,7 +167,7 @@
             // 
             // btnLamMoi
             // 
-            this.btnLamMoi.Location = new System.Drawing.Point(543, 309);
+            this.btnLamMoi.Location = new System.Drawing.Point(543, 428);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(95, 23);
             this.btnLamMoi.TabIndex = 13;
@@ -185,6 +185,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.btnLamMoi);

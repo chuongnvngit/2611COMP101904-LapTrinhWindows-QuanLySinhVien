@@ -5,19 +5,18 @@
         public string MaLop { get; set; }
         public string TenLop { get; set; }
         public string MaKhoa { get; set; }
+        public string KhoaHoc { get; set; }
 
         public LopDTO()
         {
         }
 
-        public LopDTO(
-            string maLop,
-            string tenLop,
-            string maKhoa)
+        public LopDTO(string maLop, string tenLop, string maKhoa, string khoaHoc)
         {
             MaLop = maLop;
             TenLop = tenLop;
             MaKhoa = maKhoa;
+            KhoaHoc = khoaHoc;
         }
     }
 }

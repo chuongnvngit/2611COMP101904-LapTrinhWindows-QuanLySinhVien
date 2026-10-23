@@ -133,4 +133,31 @@
   <data name="Anh-bau-troi-va-hoa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Anh-bau-troi-va-hoa.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LogoTruong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images__1_-removebg-preview (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_Sinhvien" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_Sinhvien.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_Lop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_Lop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_Khoa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_Khoa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_MonHoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_MonHoc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_Trangchu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_Trangchu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_Diem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_Diem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_Ketqua" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_Ketqua.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_TaoTaiKhoan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon_TaoTaiKhoan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

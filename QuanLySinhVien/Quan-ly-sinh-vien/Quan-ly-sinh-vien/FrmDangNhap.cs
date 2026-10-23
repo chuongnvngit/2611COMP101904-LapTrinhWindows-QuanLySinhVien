@@ -25,13 +25,7 @@ namespace Quan_ly_sinh_vien
             // Kiểm tra tên đăng nhập
             if (string.IsNullOrWhiteSpace(tenDangNhap))
             {
-                MessageBox.Show(
-                    "Vui lòng nhập tên đăng nhập!",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
+                MessageBox.Show("Vui lòng nhập tên đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTenDangNhap.Focus();
                 return;
             }
@@ -39,13 +33,7 @@ namespace Quan_ly_sinh_vien
             // Kiểm tra mật khẩu
             if (string.IsNullOrWhiteSpace(matKhau))
             {
-                MessageBox.Show(
-                    "Vui lòng nhập mật khẩu!",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
+                MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMatKhau.Focus();
                 return;
             }
@@ -53,37 +41,22 @@ namespace Quan_ly_sinh_vien
             try
             {
                 // Gọi BLL để kiểm tra tài khoản
-                TaiKhoanDTO taiKhoan = taiKhoanBLL.DangNhap(
-                    tenDangNhap,
-                    matKhau
-                );
+                TaiKhoanDTO taiKhoan = taiKhoanBLL.DangNhap(tenDangNhap, matKhau);
 
                 // Kiểm tra kết quả
                 if (taiKhoan == null)
                 {
-                    MessageBox.Show(
-                        "Tên đăng nhập hoặc mật khẩu không chính xác!",
-                        "Đăng nhập thất bại",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!", "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Thông báo đăng nhập thành công
-                MessageBox.Show(
-                    "Đăng nhập thành công!\nXin chào " + taiKhoan.HoTen,
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                MessageBox.Show("Đăng nhập thành công!\nXin chào " + taiKhoan.HoTen, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Tạo FrmMain
                 FrmMain frmMain = new FrmMain(taiKhoan);
 
-                // Khi FrmMain đóng:
-                // quay trở lại FrmDangNhap
+                // Khi FrmMain đóng: quay trở lại FrmDangNhap
                 frmMain.FormClosed += FrmMain_FormClosed;
 
                 // Ẩn FrmDangNhap
@@ -94,12 +67,27 @@ namespace Quan_ly_sinh_vien
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message,
-                    "Đăng nhập thất bại",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageBox.Show(ex.Message, "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // =====================================================
+        // NÚT HIỆN/ẨN MẬT KHẨU
+        // =====================================================
+        private void btnHienMatKhau_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra xem ô mật khẩu đang ẩn hay hiện
+            if (txtMatKhau.UseSystemPasswordChar)
+            {
+                // Đang ẩn -> Tắt mã hóa hệ thống để hiện text thường
+                txtMatKhau.UseSystemPasswordChar = false;
+                btnHienMatKhau.Text = "Ẩn";
+            }
+            else
+            {
+                // Đang hiện -> Bật lại mã hóa hệ thống thành dấu sao
+                txtMatKhau.UseSystemPasswordChar = true;
+                btnHienMatKhau.Text = "Hiện";
             }
         }
 
@@ -111,6 +99,10 @@ namespace Quan_ly_sinh_vien
             // Xóa dữ liệu đăng nhập cũ
             txtTenDangNhap.Clear();
             txtMatKhau.Clear();
+
+            // Trả nút ẩn hiện về trạng thái mặc định an toàn
+            txtMatKhau.UseSystemPasswordChar = true;
+            btnHienMatKhau.Text = "Hiện";
 
             // Hiện lại FrmDangNhap
             this.Show();
@@ -139,23 +131,10 @@ namespace Quan_ly_sinh_vien
 
         // =====================================================
         // CÁC EVENT CŨ CỦA DESIGNER
-        // Giữ lại để tránh lỗi Designer
         // =====================================================
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void FrmDangNhap_Load(object sender, EventArgs e)
-        {
-        }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void textBox1_TextChanged(object sender, EventArgs e) { }
+        private void button1_Click(object sender, EventArgs e) { }
+        private void FrmDangNhap_Load(object sender, EventArgs e) { }
     }
 }

@@ -2,15 +2,8 @@
 {
     partial class FrmSinhVien
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,12 +15,9 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSinhVien));
             this.txtMaSV = new System.Windows.Forms.TextBox();
             this.txtDiaChi = new System.Windows.Forms.TextBox();
             this.txtHoTen = new System.Windows.Forms.TextBox();
@@ -40,6 +30,8 @@
             this.cboLop = new System.Windows.Forms.ComboBox();
             this.cboKhoa = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnChonAnh = new System.Windows.Forms.Button();
+            this.picHinhAnh = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cboKhoaHoc = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,8 +48,12 @@
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnLoc = new System.Windows.Forms.Button();
+            this.btnInThe = new System.Windows.Forms.Button();
+            this.pdInThe = new System.Drawing.Printing.PrintDocument();
+            this.ppdInThe = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSinhVien)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnh)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -146,7 +142,7 @@
             this.dgvSinhVien.Name = "dgvSinhVien";
             this.dgvSinhVien.RowHeadersWidth = 51;
             this.dgvSinhVien.RowTemplate.Height = 24;
-            this.dgvSinhVien.Size = new System.Drawing.Size(1168, 266);
+            this.dgvSinhVien.Size = new System.Drawing.Size(1229, 326);
             this.dgvSinhVien.TabIndex = 10;
             this.dgvSinhVien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellContentClick);
             // 
@@ -169,6 +165,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.groupBox1.Controls.Add(this.btnChonAnh);
+            this.groupBox1.Controls.Add(this.picHinhAnh);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cboKhoaHoc);
             this.groupBox1.Controls.Add(this.label7);
@@ -189,9 +187,30 @@
             this.groupBox1.Controls.Add(this.radNam);
             this.groupBox1.Location = new System.Drawing.Point(62, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(811, 213);
+            this.groupBox1.Size = new System.Drawing.Size(850, 213);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
+            // 
+            // btnChonAnh
+            // 
+            this.btnChonAnh.Location = new System.Drawing.Point(720, 155);
+            this.btnChonAnh.Name = "btnChonAnh";
+            this.btnChonAnh.Size = new System.Drawing.Size(100, 26);
+            this.btnChonAnh.TabIndex = 23;
+            this.btnChonAnh.Text = "Chọn ảnh";
+            this.btnChonAnh.UseVisualStyleBackColor = true;
+            this.btnChonAnh.Click += new System.EventHandler(this.btnChonAnh_Click);
+            // 
+            // picHinhAnh
+            // 
+            this.picHinhAnh.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.picHinhAnh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picHinhAnh.Location = new System.Drawing.Point(720, 16);
+            this.picHinhAnh.Name = "picHinhAnh";
+            this.picHinhAnh.Size = new System.Drawing.Size(100, 130);
+            this.picHinhAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picHinhAnh.TabIndex = 22;
+            this.picHinhAnh.TabStop = false;
             // 
             // label8
             // 
@@ -314,7 +333,7 @@
             this.groupBox3.Controls.Add(this.dgvSinhVien);
             this.groupBox3.Location = new System.Drawing.Point(51, 366);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1067, 196);
+            this.groupBox3.Size = new System.Drawing.Size(1146, 256);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Danh sách sinh viên";
@@ -350,13 +369,41 @@
             this.btnLoc.UseVisualStyleBackColor = false;
             this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
+            // btnInThe
+            // 
+            this.btnInThe.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnInThe.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInThe.ForeColor = System.Drawing.Color.White;
+            this.btnInThe.Location = new System.Drawing.Point(770, 262);
+            this.btnInThe.Name = "btnInThe";
+            this.btnInThe.Size = new System.Drawing.Size(114, 34);
+            this.btnInThe.TabIndex = 21;
+            this.btnInThe.Text = "In thẻ SV";
+            this.btnInThe.UseVisualStyleBackColor = false;
+            this.btnInThe.Click += new System.EventHandler(this.btnInThe_Click);
+            // 
+            // pdInThe
+            // 
+            this.pdInThe.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pdInThe_PrintPage);
+            // 
+            // ppdInThe
+            // 
+            this.ppdInThe.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.ppdInThe.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.ppdInThe.ClientSize = new System.Drawing.Size(400, 300);
+            this.ppdInThe.Enabled = true;
+            this.ppdInThe.Icon = ((System.Drawing.Icon)(resources.GetObject("ppdInThe.Icon")));
+            this.ppdInThe.Name = "ppdInThe";
+            this.ppdInThe.Visible = false;
+            // 
             // FrmSinhVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.BackgroundImage = global::Quan_ly_sinh_vien.Properties.Resources.hinh_anh_bau_troi_dep_22;
-            this.ClientSize = new System.Drawing.Size(1198, 574);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1247, 728);
+            this.Controls.Add(this.btnInThe);
             this.Controls.Add(this.btnLoc);
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnThem);
@@ -372,6 +419,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSinhVien)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnh)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -408,5 +456,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cboKhoaHoc;
         private System.Windows.Forms.Button btnLoc;
+        private System.Windows.Forms.Button btnInThe;
+        private System.Drawing.Printing.PrintDocument pdInThe;
+        private System.Windows.Forms.PrintPreviewDialog ppdInThe;
+        private System.Windows.Forms.PictureBox picHinhAnh;
+        private System.Windows.Forms.Button btnChonAnh;
     }
 }

@@ -78,6 +78,18 @@
     <Compile Include="FrmDangNhap.Designer.cs">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHocPhi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHocPhi.Designer.cs">
+      <DependentUpon>FrmHocPhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmKetQua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmKetQua.Designer.cs">
+      <DependentUpon>FrmKetQua.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmKhoa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,10 +120,17 @@
     <Compile Include="FrmSinhVien.Designer.cs">
       <DependentUpon>FrmSinhVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmTaoTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmTaoTaiKhoan.Designer.cs" />
     <EmbeddedResource Include="FrmDangNhap.resx">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHocPhi.resx">
+      <DependentUpon>FrmHocPhi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmKhoa.resx">
       <DependentUpon>FrmKhoa.cs</DependentUpon>
@@ -153,6 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database.sql" />
+    <Content Include="Resources\Icon_Ketqua.png" />
+    <Content Include="Resources\Icon_Khoa.png" />
+    <Content Include="Resources\Icon_Lop.png" />
+    <Content Include="Resources\Icon_MonHoc.png" />
+    <Content Include="Resources\Icon_Sinhvien.png" />
+    <Content Include="Resources\Icon_Trangchu.png" />
     <None Include="Resources\Anh-bau-troi-va-hoa.jpg" />
     <None Include="Resources\hinh-anh-bau-troi-dep-22.jpg" />
     <None Include="Resources\OIP %281%29.jpg" />

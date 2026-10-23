@@ -32,36 +32,27 @@
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.dgvMonHoc = new System.Windows.Forms.DataGridView();
-
             ((System.ComponentModel.ISupportInitialize)(this.dgvMonHoc)).BeginInit();
             this.SuspendLayout();
-
             // 
             // lblTieuDe
             // 
             this.lblTieuDe.AutoSize = true;
-            this.lblTieuDe.Font = new System.Drawing.Font(
-                "Microsoft Sans Serif",
-                16F,
-                System.Drawing.FontStyle.Bold,
-                System.Drawing.GraphicsUnit.Point,
-                ((byte)(0)));
+            this.lblTieuDe.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTieuDe.Location = new System.Drawing.Point(285, 20);
             this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(236, 31);
+            this.lblTieuDe.Size = new System.Drawing.Size(286, 31);
             this.lblTieuDe.TabIndex = 0;
             this.lblTieuDe.Text = "QUẢN LÝ MÔN HỌC";
-
             // 
             // lblMaMH
             // 
             this.lblMaMH.AutoSize = true;
             this.lblMaMH.Location = new System.Drawing.Point(40, 80);
             this.lblMaMH.Name = "lblMaMH";
-            this.lblMaMH.Size = new System.Drawing.Size(89, 16);
+            this.lblMaMH.Size = new System.Drawing.Size(83, 16);
             this.lblMaMH.TabIndex = 1;
             this.lblMaMH.Text = "Mã môn học:";
-
             // 
             // txtMaMH
             // 
@@ -69,17 +60,15 @@
             this.txtMaMH.Name = "txtMaMH";
             this.txtMaMH.Size = new System.Drawing.Size(220, 22);
             this.txtMaMH.TabIndex = 2;
-
             // 
             // lblTenMH
             // 
             this.lblTenMH.AutoSize = true;
             this.lblTenMH.Location = new System.Drawing.Point(40, 125);
             this.lblTenMH.Name = "lblTenMH";
-            this.lblTenMH.Size = new System.Drawing.Size(96, 16);
+            this.lblTenMH.Size = new System.Drawing.Size(88, 16);
             this.lblTenMH.TabIndex = 3;
             this.lblTenMH.Text = "Tên môn học:";
-
             // 
             // txtTenMH
             // 
@@ -87,17 +76,15 @@
             this.txtTenMH.Name = "txtTenMH";
             this.txtTenMH.Size = new System.Drawing.Size(400, 22);
             this.txtTenMH.TabIndex = 4;
-
             // 
             // lblSoTinChi
             // 
             this.lblSoTinChi.AutoSize = true;
             this.lblSoTinChi.Location = new System.Drawing.Point(40, 170);
             this.lblSoTinChi.Name = "lblSoTinChi";
-            this.lblSoTinChi.Size = new System.Drawing.Size(73, 16);
+            this.lblSoTinChi.Size = new System.Drawing.Size(63, 16);
             this.lblSoTinChi.TabIndex = 5;
             this.lblSoTinChi.Text = "Số tín chỉ:";
-
             // 
             // txtSoTinChi
             // 
@@ -105,7 +92,6 @@
             this.txtSoTinChi.Name = "txtSoTinChi";
             this.txtSoTinChi.Size = new System.Drawing.Size(100, 22);
             this.txtSoTinChi.TabIndex = 6;
-
             // 
             // btnThem
             // 
@@ -116,7 +102,6 @@
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-
             // 
             // btnCapNhat
             // 
@@ -127,7 +112,6 @@
             this.btnCapNhat.Text = "Cập nhật";
             this.btnCapNhat.UseVisualStyleBackColor = true;
             this.btnCapNhat.Click += new System.EventHandler(this.btnCapNhat_Click);
-
             // 
             // btnXoa
             // 
@@ -138,7 +122,6 @@
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-
             // 
             // btnLamMoi
             // 
@@ -149,17 +132,15 @@
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = true;
             this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
-
             // 
             // lblTimKiem
             // 
             this.lblTimKiem.AutoSize = true;
             this.lblTimKiem.Location = new System.Drawing.Point(40, 275);
             this.lblTimKiem.Name = "lblTimKiem";
-            this.lblTimKiem.Size = new System.Drawing.Size(70, 16);
+            this.lblTimKiem.Size = new System.Drawing.Size(65, 16);
             this.lblTimKiem.TabIndex = 11;
             this.lblTimKiem.Text = "Tìm kiếm:";
-
             // 
             // txtTimKiem
             // 
@@ -168,42 +149,30 @@
             this.txtTimKiem.Size = new System.Drawing.Size(400, 22);
             this.txtTimKiem.TabIndex = 12;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
-
             // 
             // dgvMonHoc
             // 
             this.dgvMonHoc.AllowUserToAddRows = false;
             this.dgvMonHoc.AllowUserToDeleteRows = false;
-            this.dgvMonHoc.AutoSizeColumnsMode =
-                System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMonHoc.ColumnHeadersHeightSizeMode =
-                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMonHoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMonHoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMonHoc.Location = new System.Drawing.Point(40, 320);
             this.dgvMonHoc.MultiSelect = false;
             this.dgvMonHoc.Name = "dgvMonHoc";
             this.dgvMonHoc.ReadOnly = true;
             this.dgvMonHoc.RowHeadersWidth = 51;
             this.dgvMonHoc.RowTemplate.Height = 24;
-            this.dgvMonHoc.SelectionMode =
-                System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMonHoc.Size = new System.Drawing.Size(720, 250);
+            this.dgvMonHoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMonHoc.Size = new System.Drawing.Size(924, 439);
             this.dgvMonHoc.TabIndex = 13;
-            this.dgvMonHoc.CellClick +=
-                new System.Windows.Forms.DataGridViewCellEventHandler(
-                    this.dgvMonHoc_CellClick);
-
+            this.dgvMonHoc.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMonHoc_CellClick);
             // 
             // FrmMonHoc
             // 
-            this.AutoScaleDimensions =
-                new System.Drawing.SizeF(8F, 16F);
-
-            this.AutoScaleMode =
-                System.Windows.Forms.AutoScaleMode.Font;
-
-            this.ClientSize =
-                new System.Drawing.Size(800, 620);
-
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(800, 620);
             this.Controls.Add(this.dgvMonHoc);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.lblTimKiem);
@@ -218,20 +187,14 @@
             this.Controls.Add(this.txtMaMH);
             this.Controls.Add(this.lblMaMH);
             this.Controls.Add(this.lblTieuDe);
-
             this.Name = "FrmMonHoc";
-            this.StartPosition =
-                System.Windows.Forms.FormStartPosition.CenterScreen;
-
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QUẢN LÝ MÔN HỌC";
-
-            this.Load +=
-                new System.EventHandler(this.FrmMonHoc_Load);
-
+            this.Load += new System.EventHandler(this.FrmMonHoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMonHoc)).EndInit();
-
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

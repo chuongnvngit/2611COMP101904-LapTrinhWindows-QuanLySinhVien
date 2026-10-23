@@ -11,9 +11,7 @@ namespace Quan_ly_sinh_vien
         public FrmMain(TaiKhoanDTO taiKhoan)
         {
             InitializeComponent();
-
             this.taiKhoan = taiKhoan;
-
             HienThiThongTinTaiKhoan();
             PhanQuyen();
         }
@@ -26,23 +24,12 @@ namespace Quan_ly_sinh_vien
             if (taiKhoan == null)
             {
                 this.Text = "QUẢN LÝ SINH VIÊN";
-
                 lblTrangThai.Text = "Chưa đăng nhập";
-
                 return;
             }
 
-            this.Text =
-                "QUẢN LÝ SINH VIÊN - "
-                + taiKhoan.HoTen
-                + " - "
-                + taiKhoan.VaiTro;
-
-            lblTrangThai.Text =
-                "Người dùng: "
-                + taiKhoan.HoTen
-                + " | Vai trò: "
-                + taiKhoan.VaiTro;
+            this.Text = "QUẢN LÝ SINH VIÊN - " + taiKhoan.HoTen + " - " + taiKhoan.VaiTro;
+            lblTrangThai.Text = "Người dùng: " + taiKhoan.HoTen + " | Vai trò: " + taiKhoan.VaiTro;
         }
 
         // =========================================================
@@ -53,24 +40,24 @@ namespace Quan_ly_sinh_vien
             if (taiKhoan == null)
                 return;
 
-            // Mặc định: ẩn các chức năng quản lý
+            // Mặc định: ẩn toàn bộ chức năng quản lý và tạo tài khoản
             menuKhoa.Visible = false;
             menuLop.Visible = false;
             menuMonHoc.Visible = false;
             menuSinhVien.Visible = false;
             menuKetQua.Visible = false;
             menuKetQuaHocTap.Visible = false;
+            menuTaoTaiKhoan.Visible = false;
 
             btnKhoa.Visible = false;
             btnLop.Visible = false;
             btnMonHoc.Visible = false;
             btnSinhVien.Visible = false;
             btnKetQua.Visible = false;
+            btnTaoTaiKhoan.Visible = false;
 
-            // =========================
-            // ADMIN
-            // =========================
-            if (taiKhoan.VaiTro == "Admin")
+            // Quyền chung cho cả Admin và Giáo vụ
+            if (taiKhoan.VaiTro == "Admin" || taiKhoan.VaiTro == "GiaoVu")
             {
                 menuKhoa.Visible = true;
                 menuLop.Visible = true;
@@ -84,30 +71,13 @@ namespace Quan_ly_sinh_vien
                 btnMonHoc.Visible = true;
                 btnSinhVien.Visible = true;
                 btnKetQua.Visible = true;
+
+                if (taiKhoan.VaiTro == "Admin")
+                {
+                    menuTaoTaiKhoan.Visible = true;
+                    btnTaoTaiKhoan.Visible = true;
+                }
             }
-
-            // =========================
-            // GIÁO VỤ
-            // =========================
-            else if (taiKhoan.VaiTro == "GiaoVu")
-            {
-                menuKhoa.Visible = true;
-                menuLop.Visible = true;
-                menuMonHoc.Visible = true;
-                menuSinhVien.Visible = true;
-                menuKetQua.Visible = true;
-                menuKetQuaHocTap.Visible = true;
-
-                btnKhoa.Visible = true;
-                btnLop.Visible = true;
-                btnMonHoc.Visible = true;
-                btnSinhVien.Visible = true;
-                btnKetQua.Visible = true;
-            }
-
-            // =========================
-            // GIẢNG VIÊN
-            // =========================
             else if (taiKhoan.VaiTro == "GiangVien")
             {
                 menuSinhVien.Visible = true;
@@ -118,6 +88,7 @@ namespace Quan_ly_sinh_vien
                 btnKetQua.Visible = true;
             }
         }
+
         private void MoForm(Form form)
         {
             foreach (Form child in this.MdiChildren)
@@ -129,7 +100,6 @@ namespace Quan_ly_sinh_vien
                     return;
                 }
             }
-
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();
@@ -145,42 +115,25 @@ namespace Quan_ly_sinh_vien
         }
 
         // =========================================================
-        // ĐĂNG XUẤT
+        // ĐĂNG XUẤT VÀ THOÁT
         // =========================================================
         private void menuDangXuat_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Bạn có chắc chắn muốn đăng xuất không?",
-                "Đăng xuất",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                // 1. Quét và đóng toàn bộ các Form con (MdiChildren) đang mở
-                // Giúp giải phóng hoàn toàn bộ nhớ và ngắt các kết nối CSDL đang bị treo
                 foreach (Form child in this.MdiChildren)
                 {
                     child.Close();
-                    child.Dispose(); // Xóa sổ hoàn toàn form cũ
+                    child.Dispose();
                 }
-
-                // 2. Đóng Form Main để quay về màn hình Đăng nhập
                 this.Close();
             }
         }
 
-        // =========================================================
-        // THOÁT CHƯƠNG TRÌNH
-        // =========================================================
         private void menuThoat_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Bạn có chắc chắn muốn thoát chương trình không?",
-                "Thoát",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát chương trình không?", "Thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 Application.Exit();
@@ -190,13 +143,36 @@ namespace Quan_ly_sinh_vien
         // =========================================================
         // TRANG CHỦ
         // =========================================================
+
         private void btnTrangChu_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Bạn đang ở trang chủ.",
-                "Trang chủ",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            // 1. Kiểm tra xem có đang mở Form con nào không (Khoa, Lớp, Sinh viên...)
+            if (this.MdiChildren.Length > 0)
+            {
+                // 2. Hiển thị hộp thoại cảnh báo người dùng
+                DialogResult result = MessageBox.Show(
+                    "Bạn có chắc chắn muốn đóng các cửa sổ hiện tại và quay về Trang chủ không?\n(Mọi dữ liệu chưa bấm Lưu sẽ bị mất)",
+                    "Xác nhận chuyển trang",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                // 3. Nếu người dùng đồng ý quay về
+                if (result == DialogResult.Yes)
+                {
+                    // Duyệt qua tất cả các form con đang mở và đóng chúng lại
+                    foreach (Form child in this.MdiChildren)
+                    {
+                        child.Close();
+                        child.Dispose();
+                    }
+                }
+            }
+            else
+            {
+                // Nếu không có cửa sổ con nào đang mở, báo cho họ biết họ đã ở trang chủ
+                MessageBox.Show("Bạn đang ở trang chủ.", "Trang chủ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         // =========================================================
@@ -211,6 +187,7 @@ namespace Quan_ly_sinh_vien
         {
             MoForm(new FrmKhoa());
         }
+
         // =========================================================
         // LỚP
         // =========================================================
@@ -229,20 +206,12 @@ namespace Quan_ly_sinh_vien
         // =========================================================
         private void btnMonHoc_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Chức năng Quản lý Môn học đang được xây dựng.",
-                "Quản lý Môn học",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MoForm(new FrmMonHoc());
         }
 
         private void menuMonHoc_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Chức năng Quản lý Môn học đang được xây dựng.",
-                "Quản lý Môn học",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MoForm(new FrmMonHoc());
         }
 
         // =========================================================
@@ -250,28 +219,20 @@ namespace Quan_ly_sinh_vien
         // =========================================================
         private void btnSinhVien_Click(object sender, EventArgs e)
         {
-            // Đã thay thế MessageBox bằng hàm gọi Form Sinh Viên
             MoForm(new FrmSinhVien());
         }
 
         private void menuSinhVien_Click(object sender, EventArgs e)
         {
-            // Đã thay thế MessageBox bằng hàm gọi Form Sinh Viên
             MoForm(new FrmSinhVien());
         }
-
-      
 
         // =========================================================
         // KẾT QUẢ
         // =========================================================
         private void btnKetQua_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Chức năng Kết quả học tập đang được xây dựng.",
-                "Kết quả học tập",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MoForm(new FrmKetQua());
         }
 
         private void menuKetQua_Click(object sender, EventArgs e)
@@ -281,16 +242,42 @@ namespace Quan_ly_sinh_vien
 
         private void menuKetQuaHocTap_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Chức năng Kết quả học tập đang được xây dựng.",
-                "Kết quả học tập",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MoForm(new FrmKetQua());
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+        }
 
+        private void menuTaoTaiKhoan_Click(object sender, EventArgs e)
+        {
+            FrmTaoTaiKhoan frm = new FrmTaoTaiKhoan();
+            frm.ShowDialog(); 
+        }
+
+        private void btnHocPhi_Click(object sender, EventArgs e)
+        {
+            // 1. Kiểm tra xem Form Học Phí đã mở chưa, nếu mở rồi thì focus vào nó
+            foreach (Form childForm in this.MdiChildren)
+            {
+                if (childForm is FrmHocPhi)
+                {
+                    childForm.Activate();
+                    return;
+                }
+            }
+
+            // 2. Tắt các Form khác đang mở (dọn dẹp giao diện)
+            foreach (Form childForm in this.MdiChildren)
+            {
+                childForm.Close();
+            }
+
+            // 3. Mở Form Học phí
+            FrmHocPhi frm = new FrmHocPhi();
+            frm.MdiParent = this; // Hiển thị bên trong Form Main
+            frm.Dock = DockStyle.Fill; // Phóng to lấp đầy khoảng trống
+            frm.Show();
         }
     }
 }

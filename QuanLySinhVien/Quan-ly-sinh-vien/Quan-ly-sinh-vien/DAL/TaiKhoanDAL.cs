@@ -46,5 +46,25 @@ namespace Quan_ly_sinh_vien.DAL
                 "SELECT TenDangNhap, HoTen, VaiTro FROM TaiKhoan"
             );
         }
+
+        public bool TaoTaiKhoan(TaiKhoanDTO tk)
+        {
+            SqlParameter paramKetQua = new SqlParameter("@KetQua", SqlDbType.Int);
+            paramKetQua.Direction = ParameterDirection.Output;
+
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@TenDangNhap", tk.TenDangNhap.Trim()),
+                new SqlParameter("@MatKhau", tk.MatKhau.Trim()),
+                new SqlParameter("@HoTen", tk.HoTen.Trim()),
+                new SqlParameter("@VaiTro", tk.VaiTro.Trim()),
+                paramKetQua 
+            };
+
+            Database.ExecuteProcedure("sp_TaoTaiKhoan", parameters);
+
+            int ketQua = Convert.ToInt32(paramKetQua.Value);
+            return ketQua == 1;
+        }
     }
 }

@@ -2,15 +2,9 @@
 {
     partial class FrmKhoa
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -145,7 +139,7 @@
             this.dgvKhoa.RowHeadersWidth = 51;
             this.dgvKhoa.RowTemplate.Height = 24;
             this.dgvKhoa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKhoa.Size = new System.Drawing.Size(372, 150);
+            this.dgvKhoa.Size = new System.Drawing.Size(858, 321);
             this.dgvKhoa.TabIndex = 10;
             this.dgvKhoa.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhoa_CellContentClick);
             // 
@@ -153,6 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(882, 503);
             this.Controls.Add(this.dgvKhoa);
             this.Controls.Add(this.txtTimKiem);

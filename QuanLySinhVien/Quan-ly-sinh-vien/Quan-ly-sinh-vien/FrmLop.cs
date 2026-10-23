@@ -88,6 +88,9 @@ namespace Quan_ly_sinh_vien
                 if (dgvLop.Columns.Contains("TenKhoa"))
                     dgvLop.Columns["TenKhoa"].HeaderText = "Tên khoa";
 
+                if (dgvLop.Columns.Contains("KhoaHoc"))
+                    dgvLop.Columns["KhoaHoc"].HeaderText = "Khóa học";
+
                 dgvLop.ClearSelection();
             }
             catch (Exception ex)
@@ -153,7 +156,8 @@ namespace Quan_ly_sinh_vien
                 {
                     MaLop = maLop,
                     TenLop = tenLop,
-                    MaKhoa = maKhoa
+                    MaKhoa = maKhoa,
+                    KhoaHoc = txtKhoaHoc.Text.Trim()
                 };
 
                 bool ketQua = lopBLL.Them(lop);
@@ -196,7 +200,8 @@ namespace Quan_ly_sinh_vien
                 {
                     MaLop = txtMaLop.Text.Trim(),
                     TenLop = txtTenLop.Text.Trim(),
-                    MaKhoa = maKhoa
+                    MaKhoa = maKhoa,
+                    KhoaHoc = txtKhoaHoc.Text.Trim()
                 };
 
                 bool ketQua = lopBLL.CapNhat(lop);
@@ -297,6 +302,8 @@ namespace Quan_ly_sinh_vien
 
             txtTimKiem.Clear();
 
+            txtKhoaHoc.Clear();
+
             dgvLop.ClearSelection();
 
             txtMaLop.Focus();
@@ -333,6 +340,11 @@ namespace Quan_ly_sinh_vien
                     row.Cells["MaKhoa"].Value.ToString();
             }
 
+            if (row.Cells["KhoaHoc"].Value != null)
+            {
+                txtKhoaHoc.Text = row.Cells["KhoaHoc"].Value.ToString();
+            }
+
             txtMaLop.ReadOnly = true;
         }
 
@@ -365,7 +377,8 @@ namespace Quan_ly_sinh_vien
                 "MaLop LIKE '%" + tuKhoaAnToan + "%' " +
                 "OR TenLop LIKE '%" + tuKhoaAnToan + "%' " +
                 "OR MaKhoa LIKE '%" + tuKhoaAnToan + "%' " +
-                "OR TenKhoa LIKE '%" + tuKhoaAnToan + "%'";
+                "OR TenKhoa LIKE '%" + tuKhoaAnToan + "%'" +
+                "OR KhoaHoc LIKE '%" + tuKhoaAnToan + "%'";
 
             dgvLop.DataSource = view;
         }

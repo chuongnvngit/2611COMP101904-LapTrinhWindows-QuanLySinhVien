@@ -36,5 +36,28 @@ namespace Quan_ly_sinh_vien.BLL
         {
             return dal.LayTatCaTaiKhoan();
         }
+
+        public bool TaoTaiKhoan(TaiKhoanDTO tk)
+        {
+            if (string.IsNullOrWhiteSpace(tk.TenDangNhap) ||
+                string.IsNullOrWhiteSpace(tk.MatKhau) ||
+                string.IsNullOrWhiteSpace(tk.HoTen) ||
+                string.IsNullOrWhiteSpace(tk.VaiTro))
+            {
+                throw new Exception("Vui lòng nhập đầy đủ thông tin bắt buộc!");
+            }
+
+            if (tk.MatKhau.Trim().Length < 6)
+            {
+                throw new Exception("Mật khẩu phải chứa ít nhất 6 ký tự!");
+            }
+
+            if (tk.VaiTro != "Admin" && tk.VaiTro != "GiaoVu" && tk.VaiTro != "GiangVien")
+            {
+                throw new Exception("Vai trò tài khoản không hợp lệ. Chỉ chấp nhận Admin, GiaoVu hoặc GiangVien.");
+            }
+
+            return dal.TaoTaiKhoan(tk);
+        }
     }
 }

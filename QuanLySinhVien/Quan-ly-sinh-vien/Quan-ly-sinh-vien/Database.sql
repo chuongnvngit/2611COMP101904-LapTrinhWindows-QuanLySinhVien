@@ -16,8 +16,12 @@ GO
 USE QLSinhVien;
 GO
 
+IF COL_LENGTH('SINHVIEN', 'HinhAnh') IS NULL
+    ALTER TABLE SINHVIEN ADD HinhAnh NVARCHAR(255) NULL;
+GO
+
 -- =============================================
--- 1. TẠO CÁC BẢNG DỮ LIỆU (GIỮ NGUYÊN CẤU TRÚC GỐC)
+-- 1. TẠO CÁC BẢNG DỮ LIỆU
 -- =============================================
 
 -- Bảng Khoa
@@ -31,7 +35,7 @@ BEGIN
 END
 GO
 
--- Bảng Lop (Giữ nguyên VARCHAR(10))
+-- Bảng Lop
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Lop')
 BEGIN
     CREATE TABLE Lop (
@@ -52,7 +56,7 @@ BEGIN
 END
 GO
 
--- Bảng SinhVien (Giữ nguyên VARCHAR(10))
+-- Bảng SinhVien
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'SinhVien')
 BEGIN
     CREATE TABLE SinhVien (
@@ -63,11 +67,21 @@ BEGIN
         DiaChi NVARCHAR(200) NULL,
         HinhAnh NVARCHAR(255) NULL,
         MaLop VARCHAR(10) NOT NULL,
+        NganhHoc NVARCHAR(100) NULL,
+        KyNghiDinh116 BIT DEFAULT 0,
         CONSTRAINT PK_SinhVien PRIMARY KEY (MaSV),
         CONSTRAINT CK_SinhVien_GioiTinh CHECK (GioiTinh IN (N'Nam', N'Nữ')),
         CONSTRAINT FK_SinhVien_Lop FOREIGN KEY (MaLop) REFERENCES Lop(MaLop)
     );
 END
+GO
+
+IF COL_LENGTH('SinhVien', 'HinhAnh') IS NULL
+    ALTER TABLE SinhVien ADD HinhAnh NVARCHAR(255) NULL;
+IF COL_LENGTH('SinhVien', 'NganhHoc') IS NULL
+    ALTER TABLE SinhVien ADD NganhHoc NVARCHAR(100) NULL;
+IF COL_LENGTH('SinhVien', 'KyNghiDinh116') IS NULL
+    ALTER TABLE SinhVien ADD KyNghiDinh116 BIT DEFAULT 0;
 GO
 
 -- Bảng MonHoc
@@ -77,13 +91,18 @@ BEGIN
         MaMH VARCHAR(10) NOT NULL,
         TenMH NVARCHAR(100) NOT NULL,
         SoTinChi INT NOT NULL,
+        DonGiaTinChi DECIMAL(18,0) DEFAULT 700000,
         CONSTRAINT PK_MonHoc PRIMARY KEY (MaMH),
         CONSTRAINT CK_MonHoc_SoTinChi CHECK (SoTinChi > 0)
     );
 END
 GO
 
--- Bảng KetQua (Điểm số)
+IF COL_LENGTH('MonHoc', 'DonGiaTinChi') IS NULL
+    ALTER TABLE MonHoc ADD DonGiaTinChi DECIMAL(18,0) DEFAULT 700000;
+GO
+
+-- Bảng KetQua
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'KetQua')
 BEGIN
     CREATE TABLE KetQua (
@@ -128,6 +147,7 @@ BEGIN
 END;
 GO
 
+EXEC('
 CREATE OR ALTER PROCEDURE sp_LayDanhSachSinhVien
 AS
 BEGIN
@@ -135,15 +155,17 @@ BEGIN
     SELECT
         sv.MaSV, sv.HoTen, sv.NgaySinh, sv.GioiTinh,
         sv.DiaChi, sv.HinhAnh, sv.MaLop,
-        l.TenLop, l.KhoaHoc, k.MaKhoa, k.TenKhoa
+        l.TenLop, l.KhoaHoc, k.MaKhoa, k.TenKhoa,
+        sv.NganhHoc, sv.KyNghiDinh116 
     FROM SinhVien sv
     INNER JOIN Lop l ON sv.MaLop = l.MaLop
     INNER JOIN Khoa k ON l.MaKhoa = k.MaKhoa
     ORDER BY sv.MaSV ASC;
 END;
+');
 GO
 
-CREATE OR ALTER PROCEDURE sp_LocSinhVien
+CREATE OR ALTER PROCEDURE sp_LocSinhVienSS
     @MaKhoa VARCHAR(10) = NULL,
     @MaLop VARCHAR(10) = NULL,
     @KhoaHoc VARCHAR(20) = NULL
@@ -224,6 +246,31 @@ BEGIN
 END;
 GO
 
+EXEC('
+CREATE OR ALTER PROCEDURE sp_TaoTaiKhoan
+    @TenDangNhap VARCHAR(50),
+    @MatKhau VARCHAR(100),
+    @HoTen NVARCHAR(100),
+    @VaiTro VARCHAR(20),
+    @KetQua INT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenDangNhap = @TenDangNhap)
+    BEGIN
+        SET @KetQua = 0;
+        RETURN;
+    END
+
+    INSERT INTO TaiKhoan (TenDangNhap, MatKhau, HoTen, VaiTro)
+    VALUES (@TenDangNhap, @MatKhau, @HoTen, @VaiTro);
+    
+    SET @KetQua = 1;
+END;
+');
+GO
+
 -- =============================================
 -- 3. DỮ LIỆU MẪU
 -- =============================================
@@ -246,7 +293,7 @@ IF NOT EXISTS (SELECT 1 FROM Khoa WHERE MaKhoa = 'HOA')
 IF NOT EXISTS (SELECT 1 FROM Khoa WHERE MaKhoa = 'NGOAINGU')
     INSERT INTO Khoa VALUES ('NGOAINGU', N'Ngoại ngữ');
 
--- 3.3. Lớp học (Tên lớp đã bỏ chữ "Khóa" và bỏ số, MaLop <= 10 ký tự)
+-- 3.3. Lớp học
 IF NOT EXISTS (SELECT 1 FROM Lop WHERE MaLop = 'CNTT01')
     INSERT INTO Lop VALUES ('CNTT01', N'Cử nhân Công nghệ Thông tin', 'CNTT', 'K47');
 IF NOT EXISTS (SELECT 1 FROM Lop WHERE MaLop = 'CNTT02')
@@ -268,7 +315,6 @@ IF NOT EXISTS (SELECT 1 FROM Lop WHERE MaLop = 'ANH51')
 IF NOT EXISTS (SELECT 1 FROM Lop WHERE MaLop = 'HOA51')
     INSERT INTO Lop VALUES ('HOA51', N'Hóa Dược', 'HOA', 'K51');
 
--- Cập nhật đồng bộ lại tên lớp cũ trên máy của bạn (bỏ chữ Khóa và bỏ số)
 UPDATE Lop SET TenLop = N'Cử nhân Công nghệ Thông tin', KhoaHoc = 'K47' WHERE MaLop = 'CNTT01';
 UPDATE Lop SET TenLop = N'Sư phạm Tin học', KhoaHoc = 'K47' WHERE MaLop = 'CNTT02';
 UPDATE Lop SET TenLop = N'Sư phạm Toán học', KhoaHoc = 'K47' WHERE MaLop = 'TOAN01';
@@ -294,73 +340,53 @@ IF NOT EXISTS (SELECT 1 FROM MonHoc WHERE MaMH = 'CHEM1001')
     INSERT INTO MonHoc VALUES ('CHEM1001', N'Hóa đại cương', 3);
 GO
 
--- 3.5. Bổ sung 40 Sinh viên mẫu trải đều các lớp và khóa
+-- 3.5. Bổ sung 40 Sinh viên mẫu
 DECLARE @ListSV TABLE (
     MaSV VARCHAR(10), HoTen NVARCHAR(100), NgaySinh DATE, GioiTinh NVARCHAR(5), DiaChi NVARCHAR(200), HinhAnh NVARCHAR(255), MaLop VARCHAR(10)
 );
 
 INSERT INTO @ListSV VALUES
--- K47: CNTT01 (4 SV)
 ('SV001', N'Nguyễn Văn An', '2005-02-15', N'Nam', N'280 An Dương Vương, Q.5, TP.HCM', '', 'CNTT01'),
 ('SV002', N'Trần Thị Bích', '2005-08-20', N'Nữ', N'TP. Thủ Dầu Một, Bình Dương', '', 'CNTT01'),
 ('SV006', N'Bùi Hữu Đạt', '2005-04-10', N'Nam', N'Quận 10, TP.HCM', '', 'CNTT01'),
 ('SV007', N'Võ Cẩm Ly', '2005-11-22', N'Nữ', N'Bến Tre', '', 'CNTT01'),
-
--- K47: CNTT02 (4 SV)
 ('SV003', N'Lê Hoàng Long', '2005-11-05', N'Nam', N'Biên Hòa, Đồng Nai', '', 'CNTT02'),
 ('SV008', N'Phan Gia Bảo', '2005-01-18', N'Nam', N'Quận Tân Bình, TP.HCM', '', 'CNTT02'),
 ('SV009', N'Đặng Thu Hà', '2005-07-09', N'Nữ', N'Bình Phước', '', 'CNTT02'),
 ('SV010', N'Hồ Minh Trí', '2005-12-14', N'Nam', N'Quận 3, TP.HCM', '', 'CNTT02'),
-
--- K47: TOAN01 (4 SV)
 ('SV004', N'Phạm Thùy Dương', '2005-05-12', N'Nữ', N'Tân An, Long An', '', 'TOAN01'),
 ('SV011', N'Trương Công Tuấn', '2005-03-25', N'Nam', N'Tây Ninh', '', 'TOAN01'),
 ('SV012', N'Nguyễn Thanh Trúc', '2005-09-17', N'Nữ', N'Bình Thuận', '', 'TOAN01'),
 ('SV013', N'Lý Vĩnh Phát', '2005-06-30', N'Nam', N'Quận 6, TP.HCM', '', 'TOAN01'),
-
--- K47: ANH01 (4 SV)
 ('SV005', N'Đỗ Minh Quân', '2005-09-30', N'Nam', N'Mỹ Tho, Tiền Giang', '', 'ANH01'),
 ('SV014', N'Cao Thảo My', '2005-02-08', N'Nữ', N'Quận 7, TP.HCM', '', 'ANH01'),
 ('SV015', N'Phan Đình Phùng', '2005-10-15', N'Nam', N'Vũng Tàu', '', 'ANH01'),
 ('SV016', N'Dương Tuyết Mai', '2005-08-03', N'Nữ', N'Đồng Tháp', '', 'ANH01'),
-
--- K48: CNTT48 (4 SV)
 ('SV4801', N'Trần Minh Khang', '2004-03-12', N'Nam', N'Quận 1, TP.HCM', '', 'CNTT48'),
 ('SV4802', N'Huỳnh Kim Ngân', '2004-09-19', N'Nữ', N'Vĩnh Long', '', 'CNTT48'),
 ('SV4803', N'Tạ Quang Hùng', '2004-11-02', N'Nam', N'Quận 12, TP.HCM', '', 'CNTT48'),
 ('SV4804', N'Nguyễn Tuấn Kiệt', '2004-05-24', N'Nam', N'Bình Chánh, TP.HCM', '', 'CNTT48'),
-
--- K49: TOAN49 (4 SV)
 ('SV4901', N'Nguyễn Hoàng Yến', '2005-07-25', N'Nữ', N'Pleiku, Gia Lai', '', 'TOAN49'),
 ('SV4902', N'Trịnh Quốc Toản', '2005-04-14', N'Nam', N'Buôn Ma Thuột, Đắk Lắk', '', 'TOAN49'),
 ('SV4903', N'Lê Ánh Nguyệt', '2005-10-08', N'Nữ', N'Lâm Đồng', '', 'TOAN49'),
 ('SV4904', N'Hoàng Trọng Nghĩa', '2005-12-29', N'Nam', N'Nha Trang, Khánh Hòa', '', 'TOAN49'),
-
--- K49: HOA49 (4 SV)
 ('SV4905', N'Lưu Khánh Vy', '2005-03-01', N'Nữ', N'Phan Thiết, Bình Thuận', '', 'HOA49'),
 ('SV4906', N'Đinh Hữu Thành', '2005-06-16', N'Nam', N'Quận 4, TP.HCM', '', 'HOA49'),
 ('SV4907', N'Mai Phương Thảo', '2005-08-11', N'Nữ', N'Hóc Môn, TP.HCM', '', 'HOA49'),
 ('SV4908', N'Châu Vĩnh Thuận', '2005-11-04', N'Nam', N'Quận 8, TP.HCM', '', 'HOA49'),
-
--- K50: CNTT50 (4 SV)
 ('SV5001', N'Lê Quốc Huy', '2006-10-18', N'Nam', N'Ninh Kiều, Cần Thơ', '', 'CNTT50'),
 ('SV5002', N'Vũ Ngọc Diệp', '2006-01-26', N'Nữ', N'Củ Chi, TP.HCM', '', 'CNTT50'),
 ('SV5003', N'Ngô Tấn Tài', '2006-06-14', N'Nam', N'An Giang', '', 'CNTT50'),
 ('SV5004', N'Lâm Mỹ Dung', '2006-08-27', N'Nữ', N'Kiên Giang', '', 'CNTT50'),
-
--- K51: ANH51 (4 SV)
 ('SV5101', N'Võ Mai Chi', '2007-12-05', N'Nữ', N'Hải Châu, Đà Nẵng', '', 'ANH51'),
 ('SV5102', N'Nguyễn Bá Phong', '2007-02-14', N'Nam', N'TP. Huế', '', 'ANH51'),
 ('SV5103', N'Tô Ngọc Trâm', '2007-05-30', N'Nữ', N'Quảng Nam', '', 'ANH51'),
 ('SV5104', N'Trần Đức Thịnh', '2007-09-09', N'Nam', N'Quảng Ngãi', '', 'ANH51'),
-
--- K51: HOA51 (4 SV)
 ('SV5105', N'Dương Khắc Tiệp', '2007-03-21', N'Nam', N'Quy Nhơn, Bình Định', '', 'HOA51'),
 ('SV5106', N'Hà Lan Hương', '2007-07-19', N'Nữ', N'Tuy Hòa, Phú Yên', '', 'HOA51'),
 ('SV5107', N'Phùng Khắc Khoan', '2007-10-04', N'Nam', N'Kon Tum', '', 'HOA51'),
 ('SV5108', N'Đoàn Thúy Kiều', '2007-11-15', N'Nữ', N'Hậu Giang', '', 'HOA51');
 
--- Chèn sinh viên vào bảng chính nếu chưa tồn tại
 INSERT INTO SinhVien (MaSV, HoTen, NgaySinh, GioiTinh, DiaChi, HinhAnh, MaLop)
 SELECT src.MaSV, src.HoTen, src.NgaySinh, src.GioiTinh, src.DiaChi, src.HinhAnh, src.MaLop
 FROM @ListSV src
@@ -372,7 +398,6 @@ GO
 -- =============================================
 
 -- Sinh viên K47
--- SV001 (CNTT01) - Đã có điểm để test in bảng điểm đầy đủ
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV001' AND MaMH = 'COMP1019')
     INSERT INTO KetQua VALUES ('SV001', 'COMP1019', 8.50);
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV001' AND MaMH = 'COMP1002')
@@ -380,7 +405,6 @@ IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV001' AND MaMH = 'COMP1002')
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV001' AND MaMH = 'ENG1001')
     INSERT INTO KetQua VALUES ('SV001', 'ENG1001', 9.00);
 
--- SV002, SV006, SV007 (CNTT01)
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV002' AND MaMH = 'COMP1019')
     INSERT INTO KetQua VALUES ('SV002', 'COMP1019', 9.00);
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV002' AND MaMH = 'COMP1002')
@@ -392,7 +416,6 @@ IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV006' AND MaMH = 'COMP1002')
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV007' AND MaMH = 'COMP1019')
     INSERT INTO KetQua VALUES ('SV007', 'COMP1019', 8.20);
 
--- SV003, SV008, SV009, SV010 (CNTT02)
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV003' AND MaMH = 'COMP1019')
     INSERT INTO KetQua VALUES ('SV003', 'COMP1019', 6.50);
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV003' AND MaMH = 'ENG1001')
@@ -404,7 +427,6 @@ IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV009' AND MaMH = 'COMP1019')
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV010' AND MaMH = 'COMP1019')
     INSERT INTO KetQua VALUES ('SV010', 'COMP1019', 8.75);
 
--- SV004, SV011, SV012, SV013 (TOAN01)
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV004' AND MaMH = 'MATH1001')
     INSERT INTO KetQua VALUES ('SV004', 'MATH1001', 8.00);
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV004' AND MaMH = 'COMP1002')
@@ -416,7 +438,6 @@ IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV012' AND MaMH = 'MATH1001')
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV013' AND MaMH = 'MATH1001')
     INSERT INTO KetQua VALUES ('SV013', 'MATH1001', 6.75);
 
--- SV005, SV014, SV015, SV016 (ANH01)
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV005' AND MaMH = 'ENG1001')
     INSERT INTO KetQua VALUES ('SV005', 'ENG1001', 8.75);
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV014' AND MaMH = 'ENG1001')
@@ -486,13 +507,28 @@ PRINT N'CẬP NHẬT CSDL QLSinhVien THÀNH CÔNG!';
 PRINT N'=============================================';
 GO
 
--- Kiểm tra tổng số sinh viên (40 SV)
+-- Kiểm tra tổng số sinh viên
 SELECT COUNT(*) AS TongSoSinhVien FROM SinhVien;
 
--- Kiểm tra danh sách lớp (Không có chữ Khóa, không có số)
+-- Kiểm tra danh sách lớp
 SELECT MaLop, TenLop, KhoaHoc, MaKhoa FROM Lop ORDER BY KhoaHoc, MaLop;
 
 -- Kiểm tra xem trước bảng điểm SV001
 EXEC sp_LayBangDiemSinhVien @MaSV = 'SV001';
 EXEC sp_TinhDiemTrungBinh @MaSV = 'SV001';
+GO
+
+EXEC('
+UPDATE MonHoc SET DonGiaTinChi = 700000;
+
+UPDATE SinhVien SET NganhHoc = N''Sư phạm Toán học'', KyNghiDinh116 = 1 WHERE MaLop = ''TOAN01'';
+UPDATE SinhVien SET NganhHoc = N''Sư phạm Tin học'', KyNghiDinh116 = 1 WHERE MaLop = ''CNTT02''; 
+UPDATE SinhVien SET NganhHoc = N''Sư phạm Hóa học'', KyNghiDinh116 = 1 WHERE MaLop = ''HOA49'';
+UPDATE SinhVien SET NganhHoc = N''Sư phạm Tiếng Anh'', KyNghiDinh116 = 1 WHERE MaLop = ''ANH51'';
+
+UPDATE SinhVien SET NganhHoc = N''Cử nhân Công nghệ Thông tin'', KyNghiDinh116 = 0 WHERE MaLop IN (''CNTT01'', ''CNTT48'', ''CNTT50'');
+UPDATE SinhVien SET NganhHoc = N''Ngôn ngữ Anh'', KyNghiDinh116 = 0 WHERE MaLop = ''ANH01'';
+UPDATE SinhVien SET NganhHoc = N''Toán ứng dụng'', KyNghiDinh116 = 0 WHERE MaLop = ''TOAN49'';
+UPDATE SinhVien SET NganhHoc = N''Hóa Dược'', KyNghiDinh116 = 0 WHERE MaLop = ''HOA51'';
+');
 GO
