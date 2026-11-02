@@ -40,6 +40,19 @@ namespace Quan_ly_sinh_vien.DAL
             return Database.ExecuteProcedure("sp_LocSinhVien", parameters);
         }
 
+        public bool CapNhatHocPhi(string maSV, decimal soTien)
+        {
+            string sql = "UPDATE SinhVien SET HocPhiDaDong = @SoTien WHERE MaSV = @MaSV";
+
+            SqlParameter[] p =
+            {
+                new SqlParameter("@MaSV", maSV),
+                new SqlParameter("@SoTien", soTien)
+            };
+
+            return Database.ExecuteNonQuery(sql, p) > 0;
+        }
+
         // Thêm sinh viên
         public bool Them(SinhVienDTO sv)
         {

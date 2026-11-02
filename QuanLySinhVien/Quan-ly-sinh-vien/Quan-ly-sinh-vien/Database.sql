@@ -69,6 +69,7 @@ BEGIN
         MaLop VARCHAR(10) NOT NULL,
         NganhHoc NVARCHAR(100) NULL,
         KyNghiDinh116 BIT DEFAULT 0,
+        HocPhiDaDong DECIMAL(18,0) DEFAULT 0,
         CONSTRAINT PK_SinhVien PRIMARY KEY (MaSV),
         CONSTRAINT CK_SinhVien_GioiTinh CHECK (GioiTinh IN (N'Nam', N'Nữ')),
         CONSTRAINT FK_SinhVien_Lop FOREIGN KEY (MaLop) REFERENCES Lop(MaLop)
@@ -76,12 +77,15 @@ BEGIN
 END
 GO
 
+-- LUÔN CHẠY ALTER TABLE ĐỂ ĐẢM BẢO CỘT TỒN TẠI NẾU BẢNG ĐÃ CÓ TRƯỚC ĐÓ
 IF COL_LENGTH('SinhVien', 'HinhAnh') IS NULL
     ALTER TABLE SinhVien ADD HinhAnh NVARCHAR(255) NULL;
 IF COL_LENGTH('SinhVien', 'NganhHoc') IS NULL
     ALTER TABLE SinhVien ADD NganhHoc NVARCHAR(100) NULL;
 IF COL_LENGTH('SinhVien', 'KyNghiDinh116') IS NULL
     ALTER TABLE SinhVien ADD KyNghiDinh116 BIT DEFAULT 0;
+IF COL_LENGTH('SinhVien', 'HocPhiDaDong') IS NULL
+    ALTER TABLE SinhVien ADD HocPhiDaDong DECIMAL(18,0) DEFAULT 0;
 GO
 
 -- Bảng MonHoc
@@ -147,6 +151,7 @@ BEGIN
 END;
 GO
 
+-- DÙNG DYNAMIC SQL (EXEC) ĐỂ VƯỢT QUA LỖI BIÊN DỊCH TRƯỚC KHI TẠO CỘT
 EXEC('
 CREATE OR ALTER PROCEDURE sp_LayDanhSachSinhVien
 AS
@@ -156,11 +161,27 @@ BEGIN
         sv.MaSV, sv.HoTen, sv.NgaySinh, sv.GioiTinh,
         sv.DiaChi, sv.HinhAnh, sv.MaLop,
         l.TenLop, l.KhoaHoc, k.MaKhoa, k.TenKhoa,
-        sv.NganhHoc, sv.KyNghiDinh116 
+        sv.NganhHoc, sv.KyNghiDinh116,
+        ISNULL(sv.HocPhiDaDong, 0) AS HocPhiDaDong
     FROM SinhVien sv
     INNER JOIN Lop l ON sv.MaLop = l.MaLop
     INNER JOIN Khoa k ON l.MaKhoa = k.MaKhoa
     ORDER BY sv.MaSV ASC;
+END;
+');
+GO
+
+-- DÙNG DYNAMIC SQL (EXEC) ĐỂ VƯỢT QUA LỖI BIÊN DỊCH TRƯỚC KHI TẠO CỘT
+EXEC('
+CREATE OR ALTER PROCEDURE sp_CapNhatHocPhi
+    @MaSV VARCHAR(10),
+    @SoTien DECIMAL(18,0)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE SinhVien 
+    SET HocPhiDaDong = @SoTien 
+    WHERE MaSV = @MaSV;
 END;
 ');
 GO
@@ -518,17 +539,15 @@ EXEC sp_LayBangDiemSinhVien @MaSV = 'SV001';
 EXEC sp_TinhDiemTrungBinh @MaSV = 'SV001';
 GO
 
-EXEC('
 UPDATE MonHoc SET DonGiaTinChi = 700000;
 
-UPDATE SinhVien SET NganhHoc = N''Sư phạm Toán học'', KyNghiDinh116 = 1 WHERE MaLop = ''TOAN01'';
-UPDATE SinhVien SET NganhHoc = N''Sư phạm Tin học'', KyNghiDinh116 = 1 WHERE MaLop = ''CNTT02''; 
-UPDATE SinhVien SET NganhHoc = N''Sư phạm Hóa học'', KyNghiDinh116 = 1 WHERE MaLop = ''HOA49'';
-UPDATE SinhVien SET NganhHoc = N''Sư phạm Tiếng Anh'', KyNghiDinh116 = 1 WHERE MaLop = ''ANH51'';
+UPDATE SinhVien SET NganhHoc = N'Sư phạm Toán học', KyNghiDinh116 = 1 WHERE MaLop = 'TOAN01';
+UPDATE SinhVien SET NganhHoc = N'Sư phạm Tin học', KyNghiDinh116 = 1 WHERE MaLop = 'CNTT02'; 
+UPDATE SinhVien SET NganhHoc = N'Sư phạm Hóa học', KyNghiDinh116 = 1 WHERE MaLop = 'HOA49';
+UPDATE SinhVien SET NganhHoc = N'Sư phạm Tiếng Anh', KyNghiDinh116 = 1 WHERE MaLop = 'ANH51';
 
-UPDATE SinhVien SET NganhHoc = N''Cử nhân Công nghệ Thông tin'', KyNghiDinh116 = 0 WHERE MaLop IN (''CNTT01'', ''CNTT48'', ''CNTT50'');
-UPDATE SinhVien SET NganhHoc = N''Ngôn ngữ Anh'', KyNghiDinh116 = 0 WHERE MaLop = ''ANH01'';
-UPDATE SinhVien SET NganhHoc = N''Toán ứng dụng'', KyNghiDinh116 = 0 WHERE MaLop = ''TOAN49'';
-UPDATE SinhVien SET NganhHoc = N''Hóa Dược'', KyNghiDinh116 = 0 WHERE MaLop = ''HOA51'';
-');
+UPDATE SinhVien SET NganhHoc = N'Cử nhân Công nghệ Thông tin', KyNghiDinh116 = 0 WHERE MaLop IN ('CNTT01', 'CNTT48', 'CNTT50');
+UPDATE SinhVien SET NganhHoc = N'Ngôn ngữ Anh', KyNghiDinh116 = 0 WHERE MaLop = 'ANH01';
+UPDATE SinhVien SET NganhHoc = N'Toán ứng dụng', KyNghiDinh116 = 0 WHERE MaLop = 'TOAN49';
+UPDATE SinhVien SET NganhHoc = N'Hóa Dược', KyNghiDinh116 = 0 WHERE MaLop = 'HOA51';
 GO

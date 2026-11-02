@@ -41,6 +41,17 @@ namespace Quan_ly_sinh_vien.BLL
             return dal.Them(sv);
         }
 
+        public bool CapNhatHocPhi(string maSV, decimal soTien)
+        {
+            if (string.IsNullOrWhiteSpace(maSV))
+                throw new Exception("Mã sinh viên không hợp lệ!");
+
+            if (soTien < 0)
+                throw new Exception("Số tiền học phí không được là số âm!");
+
+            return dal.CapNhatHocPhi(maSV, soTien);
+        }
+
         public bool CapNhatSinhVien(SinhVienDTO sv)
         {
             KiemTraHopLe(sv);

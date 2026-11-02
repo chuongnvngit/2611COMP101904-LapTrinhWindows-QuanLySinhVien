@@ -257,7 +257,6 @@ namespace Quan_ly_sinh_vien
 
         private void btnHocPhi_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra xem Form Học Phí đã mở chưa, nếu mở rồi thì focus vào nó
             foreach (Form childForm in this.MdiChildren)
             {
                 if (childForm is FrmHocPhi)
@@ -266,17 +265,11 @@ namespace Quan_ly_sinh_vien
                     return;
                 }
             }
+            foreach (Form childForm in this.MdiChildren) { childForm.Close(); }
 
-            // 2. Tắt các Form khác đang mở (dọn dẹp giao diện)
-            foreach (Form childForm in this.MdiChildren)
-            {
-                childForm.Close();
-            }
-
-            // 3. Mở Form Học phí
-            FrmHocPhi frm = new FrmHocPhi();
-            frm.MdiParent = this; // Hiển thị bên trong Form Main
-            frm.Dock = DockStyle.Fill; // Phóng to lấp đầy khoảng trống
+            FrmHocPhi frm = new FrmHocPhi(taiKhoan.VaiTro);
+            frm.MdiParent = this;
+            frm.Dock = DockStyle.Fill;
             frm.Show();
         }
     }
