@@ -14,9 +14,9 @@
 | Thành viên | Phụ trách chính | Công việc cụ thể | Đóng góp |
 | :--- | :--- | :--- | :---: |
 | **Chương – CSDL & tích hợp dữ liệu** | Nền tảng dữ liệu + hỗ trợ tích hợp | Tạo Database.sql, ERD, DTO, DAL, BLL. Kiểm tra App.config/SQL Server; hỗ trợ lỗi dữ liệu; kiểm tra stored procedure, truy vấn, DataTable; hỗ trợ Binding/ComboBox và kiểm thử.<br>PrintPreview/PrintDocument. Làm bài Báo Cáo | **100%** |
-| **Tín – Sinh viên** | GUI Sinh viên | FrmSinhVien; DataGridView; thêm/sửa/xóa; tìm kiếm/lọc; ComboBox Khoa/Lớp; DateTimePicker; kiểm tra dữ liệu từ BLL. Làm bài Báo Cáo | **100%** |
-| **Thái – Danh mục & Kết quả** | GUI Khoa/Lớp/Môn học/Kết quả | FrmKhoa, FrmLop, FrmMonHoc, FrmKetQua, FrmTaoTaiKhoan, FrmHocPhi; ComboBox liên kết; nhập/sửa/xem điểm; tính điểm trung bình; chức năng in ấn. | **100%** |
-| **Trầm – Đăng nhập & tích hợp** | Login + MDI + phân quyền + in ấn | FrmDangNhap, FrmMain MDI; phân quyền; MenuStrip/ToolStrip/StatusStrip; tích hợp Form; tổng hợp README, slide, demo. Làm bài Báo Cáo | **100%** |
+| **Tín – Sinh viên** | GUI Sinh viên | Tạo FrmSinhVien; DataGridView; thêm/sửa/xóa; tìm kiếm/lọc; ComboBox Khoa/Lớp; DateTimePicker; kiểm tra dữ liệu từ BLL. Làm bài Báo Cáo | **100%** |
+| **Thái – Danh mục & Kết quả** | GUI Khoa/Lớp/Môn học/Kết quả | Tạo FrmKhoa, FrmLop, FrmMonHoc, FrmKetQua, FrmTaoTaiKhoan, FrmHocPhi; ComboBox liên kết; nhập/sửa/xem điểm; tính điểm trung bình; chức năng in ấn. | **100%** |
+| **Trầm – Đăng nhập & tích hợp** | Login + MDI + phân quyền + in ấn | Tạo FrmDangNhap, FrmMain MDI; phân quyền; MenuStrip/ToolStrip/StatusStrip; tích hợp Form; tổng hợp README, slide, demo. Làm bài Báo Cáo | **100%** |
 
 ---
 
