@@ -119,12 +119,12 @@ namespace Quan_ly_sinh_vien
                     }
                     else
                     {
-                        picHinhAnh.Image = null; // Không tìm thấy file vật lý
+                        picHinhAnh.Image = null;
                     }
                 }
                 else
                 {
-                    picHinhAnh.Image = null; // Sinh viên chưa có ảnh
+                    picHinhAnh.Image = null; 
                 }
             }
         }

@@ -138,11 +138,11 @@
             this.dgvSinhVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSinhVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSinhVien.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvSinhVien.Location = new System.Drawing.Point(55, 21);
+            this.dgvSinhVien.Location = new System.Drawing.Point(6, 21);
             this.dgvSinhVien.Name = "dgvSinhVien";
             this.dgvSinhVien.RowHeadersWidth = 51;
             this.dgvSinhVien.RowTemplate.Height = 24;
-            this.dgvSinhVien.Size = new System.Drawing.Size(1229, 326);
+            this.dgvSinhVien.Size = new System.Drawing.Size(1782, 304);
             this.dgvSinhVien.TabIndex = 10;
             this.dgvSinhVien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellContentClick);
             // 
@@ -331,9 +331,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvSinhVien);
-            this.groupBox3.Location = new System.Drawing.Point(51, 366);
+            this.groupBox3.Location = new System.Drawing.Point(35, 366);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1146, 256);
+            this.groupBox3.Size = new System.Drawing.Size(1794, 331);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Danh sách sinh viên";

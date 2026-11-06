@@ -13,10 +13,10 @@
 
 | Thành viên | Phụ trách chính | Công việc cụ thể | Đóng góp |
 | :--- | :--- | :--- | :---: |
-| **TV1 – CSDL & tích hợp dữ liệu** | Nền tảng dữ liệu + hỗ trợ tích hợp | Đã hoàn thành Database.sql, ERD, DTO, DAL, BLL. Kiểm tra App.config/SQL Server; hỗ trợ lỗi dữ liệu; kiểm tra stored procedure, truy vấn, DataTable; hỗ trợ Binding/ComboBox và kiểm thử.<br>PrintPreview/PrintDocument. | **100%** |
-| **Tín – Sinh viên** | GUI Sinh viên | FrmSinhVien; DataGridView; thêm/sửa/xóa; tìm kiếm/lọc; ComboBox Khoa/Lớp; DateTimePicker; kiểm tra dữ liệu từ BLL. | **100%** |
-| **Thái – Danh mục & Kết quả** | GUI Khoa/Lớp/Môn học/Kết quả | FrmKhoa, FrmLop, FrmMonHoc, FrmKetQua; ComboBox liên kết; nhập/sửa/xem điểm; tính điểm trung bình. | **100%** |
-| **Trầm – Đăng nhập & tích hợp** | Login + MDI + phân quyền + in ấn | FrmDangNhap, FrmMain MDI; phân quyền; MenuStrip/ToolStrip/StatusStrip; tích hợp Form; tổng hợp README, slide, demo. | **100%** |
+| **Chương – CSDL & tích hợp dữ liệu** | Nền tảng dữ liệu + hỗ trợ tích hợp | Tạo Database.sql, ERD, DTO, DAL, BLL. Kiểm tra App.config/SQL Server; hỗ trợ lỗi dữ liệu; kiểm tra stored procedure, truy vấn, DataTable; hỗ trợ Binding/ComboBox và kiểm thử.<br>PrintPreview/PrintDocument. Làm bài Báo Cáo | **100%** |
+| **Tín – Sinh viên** | GUI Sinh viên | FrmSinhVien; DataGridView; thêm/sửa/xóa; tìm kiếm/lọc; ComboBox Khoa/Lớp; DateTimePicker; kiểm tra dữ liệu từ BLL. Làm bài Báo Cáo | **100%** |
+| **Thái – Danh mục & Kết quả** | GUI Khoa/Lớp/Môn học/Kết quả | FrmKhoa, FrmLop, FrmMonHoc, FrmKetQua, FrmTaoTaiKhoan, FrmHocPhi; ComboBox liên kết; nhập/sửa/xem điểm; tính điểm trung bình; chức năng in ấn. | **100%** |
+| **Trầm – Đăng nhập & tích hợp** | Login + MDI + phân quyền + in ấn | FrmDangNhap, FrmMain MDI; phân quyền; MenuStrip/ToolStrip/StatusStrip; tích hợp Form; tổng hợp README, slide, demo. Làm bài Báo Cáo | **100%** |
 
 ---
 
@@ -24,14 +24,14 @@
 
 Hệ thống Quản lý Sinh viên là một ứng dụng phần mềm Desktop được thiết kế nhằm tin học hóa và tối ưu hóa các quy trình quản lý học vụ tại môi trường Đại học/Cao đẳng. Dự án giải quyết trọn vẹn bài toán lưu trữ thông tin và tích hợp các module nghiệp vụ chuyên sâu:
 
-* Đánh giá học lực tự động qua điểm số GPA (quy đổi hệ 10 sang hệ 4).
+* Đánh giá học lực tự động qua điểm số GPA.
 * Render và in ấn Thẻ sinh viên, Bảng điểm bằng thư viện đồ họa (`System.Drawing`).
 * Hạch toán học phí tự động dựa trên tổng tín chỉ và chính sách miễn giảm đặc thù theo **Nghị định 116** của Chính phủ.
-* Quản trị bảo mật, phân quyền nghiêm ngặt theo vai trò người dùng (RBAC - Role Based Access Control).
+* Quản trị bảo mật, phân quyền nghiêm ngặt theo vai trò người dùng.
 
 ## 2. KIẾN TRÚC HỆ THỐNG (SYSTEM ARCHITECTURE)
 
-Dự án áp dụng chặt chẽ mô hình **Kiến trúc 3 Lớp (3-Tier)**, phân tách rõ ràng trách nhiệm của từng thành phần mã nguồn, giúp hệ thống dễ bảo trì, mở rộng và tăng khả năng tái sử dụng:
+Dự án áp dụng mô hình **Kiến trúc 3 Lớp (3-Tier)**, phân tách rõ ràng trách nhiệm của từng thành phần mã nguồn, giúp hệ thống dễ bảo trì, mở rộng và tăng khả năng tái sử dụng:
 
 1. **Presentation Layer (Tầng Giao diện - GUI):**
    * Bao gồm các Windows Forms (`FrmMain`, `FrmSinhVien`, `FrmKetQua`...).
@@ -69,8 +69,22 @@ Hệ thống cấp quyền truy cập linh hoạt dựa trên 3 vai trò (Role):
 
 * **Xử lý lỗi & Ràng buộc:**
   * **Lỗi bỏ trống:** Chặn ngay ở UI nếu người dùng không nhập Tài khoản hoặc Mật khẩu, tự động `Focus()` vào ô văn bản bị lỗi.
+
+![Giao diện Đăng nhập](images/02.1.png)
+*Hình 2.1: Thông báo khi bỏ trống*
+
   * **Lỗi xác thực:** Truy vấn Stored Procedure `sp_KiemTraDangNhap`. Nếu không có kết quả, `TaiKhoanBLL` ném ngoại lệ *"Tên đăng nhập hoặc mật khẩu không chính xác!"*.
+
+![Giao diện Đăng nhập](images/02.2.png)
+*Hình 2.2: Thông báo khi sai thông tin đăng nhập*
+
   * **Điều hướng MDI:** Ngăn chặn mất dữ liệu bằng hộp thoại xác nhận khi người dùng bấm về "Trang chủ" trong lúc các cửa sổ nhập liệu vẫn đang mở.
+
+![Giao diện Đăng nhập](images/02.3.png)
+*Hình 2.3: Thông báo khi ấn về trang chủ*
+
+![Giao diện Đăng nhập](images/02.4.png)
+*Hình 2.4: Thông báo khi đăng nhập thành công*
 
 ### 3.2. Quản lý Danh mục (Khoa, Lớp, Môn Học)
 
@@ -82,15 +96,29 @@ Thực hiện chuẩn CRUD cho các danh mục cốt lõi.
 * **Tính năng:**
   * Tìm kiếm Real-time bằng `DataView.RowFilter` giúp lọc ngay lập tức theo Mã hoặc Tên khi gõ phím.
   * Ràng buộc ComboBox Khoa-Lớp đồng bộ.
+
+![Quản lý Danh mục](images/03.1.png)
+*Hình 3.1: Tính năng tìm kiếm khi tìm các lớp mã CNTT*
   
 * **Xử lý lỗi & Ràng buộc:**
   * **Toàn vẹn Dữ liệu (Validation):** Không cho phép bỏ trống Mã/Tên Khoa, Lớp, Môn học. Số tín chỉ của Môn học phải được parse bằng `int.TryParse` và bắt buộc **> 0**.
+
+![Quản lý Danh mục](images/03.2.png)
+*Hình 3.2: Thông báo yêu cầu không được bỏ trống*
+
   * **Trùng lặp Khóa chính (Primary Key Violation):** Gọi hàm `KiemTraTrungMa` dưới DAL, chặn và báo lỗi *"Mã [X] đã tồn tại trong hệ thống!"* khi người dùng cố thêm mã cũ.
+
+![Quản lý Danh mục](images/03.3.png)
+*Hình 3.3: Thông báo khi nhập mã lớp trùng lặp*
+
   * **Lỗi Ràng buộc Khóa ngoại (Foreign Key Constraint):**
     * Khi bấm nút Xóa, BLL bẫy lỗi từ SQL Server (`try...catch`). 
     * Nếu Khoa đang có Lớp học -> Báo lỗi: *"Không thể xóa khoa này do đang có lớp học trực thuộc!"*.
     * Nếu Lớp đang có Sinh viên -> Báo lỗi: *"Không thể xóa lớp này do đang có sinh viên theo học!"*.
     * Nếu Môn học đã có Điểm -> Báo lỗi: *"Không thể xóa môn học này vì đã có dữ liệu điểm thi!"*.
+
+![Quản lý Danh mục](images/03.4.png)
+*Hình 3.4: Thông báo khi xóa mã môn học vì môn đã có dữ liệu ràng buộc*
 
 ### 3.3. Quản lý Hồ sơ Sinh viên toàn diện
 
@@ -102,25 +130,40 @@ Module đồ sộ quản lý nhân trắc học, liên kết đa chiều và t�
 * **Tính năng:**
   * Thêm, sửa, xóa, tìm kiếm sinh viên.
   * **Quản lý Hình ảnh:** Cho phép browse chọn ảnh từ máy. Ảnh được copy vào thư mục `Images/` của ứng dụng, đổi tên tự động bằng hàm `Guid.NewGuid()` nhằm ngăn chặn xung đột tên file.
+
+![Quản lý Sinh viên](images/04.1.png)
+*Hình 4.1: Giao diện quản khi upload ảnh*
+
   * **Bộ lọc động (Dynamic Filter):** Truyền các tham số tìm kiếm (Mã Khoa, Mã Lớp, Khóa Học) xuống Stored Procedure `sp_LocSinhVienSS`. SP này xử lý thông minh: bỏ qua các tiêu chí bị bỏ trống.
   * **In thẻ Sinh viên (GDI+):** Sử dụng đối tượng `Graphics` vẽ viền thẻ, chèn logo Đại học, in text tọa độ chuẩn xác.
 
+![Quản lý Sinh viên](images/04.2.png)
+*Hình 4.2: Giao diện khi in thẻ*  
+
 * **Xử lý lỗi & Ràng buộc:**
-  * **Xác thực logic thời gian (Age Validation):** Tính tuổi sinh viên từ `DateTimePicker`. Nếu Tuổi < 17 hoặc Tuổi > 70, ném lỗi: *"Độ tuổi sinh viên không hợp lệ!"*. Chặn chọn ngày sinh ở tương lai.
   * **Validation ComboBox:** Bắt lỗi `SelectedIndex == -1` hoặc `SelectedValue == null` tránh crash ứng dụng khi truyền `null` xuống SQL.
   * **Bảo vệ hiển thị Ảnh:** Nếu thuộc tính HinhAnh trong CSDL rỗng hoặc file vật lý bị xóa mất, khối `try...catch` sẽ gọi hàm `DrawEmptyPhotoBox()` để vẽ khung xám *"Không có ảnh"* thay vì crash hệ thống.
   * **Kiểm tra rỗng trước khi in:** Cảnh báo *"Vui lòng chọn một sinh viên trên danh sách để in thẻ!"* nếu cố tình gọi `PrintPreviewDialog` lúc lưới đang trống.
 
+![Quản lý Sinh viên](images/04.3.png)
+*Hình 4.3: Thông báo khi nhập thiếu thông tin bất kỳ( địa chỉ)*    
+
 ### 3.4. Quản lý Điểm số & Xét học vụ (GPA)
 
 ![Quản lý Điểm số](images/05.png)
-*Hình 5: Tính năng Nhập điểm, Xem GPA và hiển thị cảnh báo (Highlight) chưa có điểm*
+*Hình 5: Tính năng Nhập điểm*
 
 * **Tính năng:**
   * **Danh sách Nhập điểm thông minh:** SP `sp_LayDanhSachNhapDiem` dùng `LEFT JOIN` KetQua lên SinhVien, trả về toàn bộ lớp. Dòng nào Diem rỗng (chưa thi) sẽ tự động bị bôi vàng `Color.LightYellow` trên Grid.
   * **Cơ chế Upsert Điểm:** Khi lưu, DAL dùng kịch bản `IF EXISTS... UPDATE... ELSE... INSERT`. Sinh viên chưa có điểm sẽ Insert, đã có sẽ Update đè lên điểm cũ.
   * **Tính điểm GPA & Xếp loại:** Tự động quy đổi điểm hệ 10 sang hệ 4 thông qua bộ lọc thang điểm chữ (A, B+, B, C...). Tính trung bình tích lũy và xuất Xếp loại học lực (Xuất sắc, Giỏi, Khá, Trung bình...).
   * **In Bảng điểm cá nhân:** GDI+ vẽ table 5 cột với font "Times New Roman", tích hợp dòng tổng kết Tín chỉ/GPA ở cuối bảng.
+
+![Quản lý Điểm số](images/05.1.png)
+*Hình 5.1: Tính năng tính điểm*
+
+![Quản lý Điểm số](images/05.2.png)
+*Hình 5.2: Tính năng in bảng điểm sinh viên*  
 
 * **Xử lý lỗi & Ràng buộc:**
   * Bắt buộc ô nhập Điểm phải là định dạng thập phân `decimal.TryParse`.
@@ -139,6 +182,14 @@ Module độc quyền của Admin, xử lý tài chính tự động.
   * **Logic Nghị định 116:** Sinh viên ngành Sư phạm (có cờ `KyNghiDinh116 = 1` trong DB) sẽ tự động nhảy kết quả Học phí = 0đ và bỏ qua dư nợ. Label thông tin tự động chuyển màu Xanh lá để đánh dấu.
   * Hiển thị trạng thái "CÒN NỢ" bằng màu đỏ (Firebrick) và "HẾT NỢ" bằng màu xanh (Blue) để kế toán dễ quan sát.
 
+![Kế toán Học phí](images/06.1.png)
+*Hình 6.1: Trường hợp sinh viên chưa đóng đủ học phí*
+
+![Kế toán Học phí](images/06.2.png)
+*Hình 6.2: Trường hợp sinh viên đã đóng đủ học phí*
+
+![Kế toán Học phí](images/06.3.png)
+*Hình 6.3: Trường hợp sinh viên có ký Nghị định 116*
 * **Xử lý lỗi & Ràng buộc:**
   * **Bảo mật giao diện:** Tài khoản không phải Admin sẽ bị `Visible = false` đối với ô nhập tiền và nút cập nhật, tránh xâm phạm thao tác.
   * Chặn nhập số âm, chặn nhập ký tự chữ vào ô Đóng học phí. Ngăn chặn lỗi trừ dư (đóng dư) dẫn đến nợ âm.
@@ -151,7 +202,8 @@ Module độc quyền của Admin, xử lý tài chính tự động.
   * **Chặn nhập sai Vai trò:** ComboBox `DropDownStyle = DropDownList` cấm gõ tay, ép nhận các giá trị cứng (Admin, GiaoVu, GiangVien).
   * **Bắt trùng Username SQL:** Stored Procedure `sp_TaoTaiKhoan` sử dụng biến `@KetQua OUTPUT`. Nếu Username tồn tại, trả về 0. BLL dịch số 0 này thành hộp thoại cảnh báo: *"Tên đăng nhập đã tồn tại trong hệ thống..."*, đồng thời bôi đen (SelectAll) TextBox để nhập lại.
 
----
+![Tạo tài khoản](images/07.png)
+*Hình 6: Giao diện chức năng tạo tài khoản*
 
 ## 4. CẤU TRÚC CƠ SỞ DỮ LIỆU SƠ LƯỢC
 
@@ -171,31 +223,8 @@ Module độc quyền của Admin, xử lý tài chính tự động.
 
 ---
 
-## 5. HƯỚNG DẪN CÀI ĐẶT & SỬ DỤNG
-
-### Bước 1: Khởi tạo Cơ sở dữ liệu (Database Setup)
-1. Mở hệ quản trị **SQL Server Management Studio (SSMS)**.
-2. Mở file script `Database.sql` nằm trong Source Code.
-3. Bấm **Execute (F5)** để hệ thống tự động:
-   * Tạo Database `QLSinhVien`.
-   * Khởi tạo cấu trúc các Table (Tự động `ALTER` bổ sung cột nếu bảng cũ bị thiếu).
-   * Biên dịch các Stored Procedures qua khối lệnh `EXEC()`.
-   * Đổ sẵn **40 sinh viên mẫu** và cấu hình Cờ Sư phạm Nghị định 116 hoàn chỉnh.
-
-### Bước 2: Cấu hình kết nối (Connection String)
-1. Mở Solution dự án bằng **Visual Studio**.
-2. Mở file `App.config` tại thư mục gốc.
-3. Chỉnh sửa thuộc tính `Data Source` tại thẻ `<connectionStrings>` cho khớp với Tên Server SQL cục bộ của bạn.
-   ```xml
-   <connectionStrings>
-       <add name="QLSinhVien" 
-            connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=QLSinhVien;Integrated Security=True" 
-            providerName="System.Data.SqlClient"/>
-   </connectionStrings>
-   ```
-
-### Bước 3: Biên dịch Khởi chạy và Kiểm thử
-Nhấn F5 để Build dự án. Đăng nhập bằng 1 trong 3 tài khoản mặc định dưới đây để test tính năng phân quyền:
+## 5. Biên dịch Khởi chạy và Kiểm thử
+Build dự án. Đăng nhập bằng 1 trong 3 tài khoản mặc định dưới đây để test tính năng phân quyền:
 * **Quản trị viên (Admin):** Tài khoản `admin` / Mật khẩu `123456`
 * **Giáo vụ (GiaoVu):** Tài khoản `giaovu` / Mật khẩu `123456`
 * **Giảng viên (GiangVien):** Tài khoản `giangvien` / Mật khẩu `123456`
