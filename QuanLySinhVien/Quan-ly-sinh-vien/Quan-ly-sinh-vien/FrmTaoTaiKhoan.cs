@@ -28,9 +28,9 @@ namespace Quan_ly_sinh_vien
             LamMoi();
         }
 
-        // =========================================================
+
         // LÀM MỚI FORM (XÓA TRẮNG)
-        // =========================================================
+
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             LamMoi();
@@ -46,9 +46,9 @@ namespace Quan_ly_sinh_vien
             txtTenDangNhap.Focus();
         }
 
-        // =========================================================
+
         // NÚT LƯU (TẠO TÀI KHOẢN MỚI)
-        // =========================================================
+
         private void btnLuu_Click(object sender, EventArgs e)
         {
             try

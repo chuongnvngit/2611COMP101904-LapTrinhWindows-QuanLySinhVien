@@ -16,9 +16,7 @@ namespace Quan_ly_sinh_vien
             PhanQuyen();
         }
 
-        // =========================================================
         // HIỂN THỊ THÔNG TIN TÀI KHOẢN
-        // =========================================================
         private void HienThiThongTinTaiKhoan()
         {
             if (taiKhoan == null)
@@ -32,9 +30,7 @@ namespace Quan_ly_sinh_vien
             lblTrangThai.Text = "Người dùng: " + taiKhoan.HoTen + " | Vai trò: " + taiKhoan.VaiTro;
         }
 
-        // =========================================================
         // PHÂN QUYỀN
-        // =========================================================
         private void PhanQuyen()
         {
             if (taiKhoan == null)
@@ -105,18 +101,18 @@ namespace Quan_ly_sinh_vien
             form.Show();
         }
 
-        // =========================================================
+
         // FORM LOAD
-        // =========================================================
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             HienThiThongTinTaiKhoan();
             PhanQuyen();
         }
 
-        // =========================================================
+
         // ĐĂNG XUẤT VÀ THOÁT
-        // =========================================================
+
         private void menuDangXuat_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -140,9 +136,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // TRANG CHỦ
-        // =========================================================
+
 
         private void btnTrangChu_Click(object sender, EventArgs e)
         {
@@ -175,9 +171,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // KHOA
-        // =========================================================
+
         private void btnKhoa_Click(object sender, EventArgs e)
         {
             MoForm(new FrmKhoa());
@@ -188,9 +184,9 @@ namespace Quan_ly_sinh_vien
             MoForm(new FrmKhoa());
         }
 
-        // =========================================================
+
         // LỚP
-        // =========================================================
+
         private void btnLop_Click(object sender, EventArgs e)
         {
             MoForm(new FrmLop());
@@ -201,9 +197,9 @@ namespace Quan_ly_sinh_vien
             MoForm(new FrmLop());
         }
 
-        // =========================================================
+
         // MÔN HỌC
-        // =========================================================
+
         private void btnMonHoc_Click(object sender, EventArgs e)
         {
             MoForm(new FrmMonHoc());
@@ -214,9 +210,9 @@ namespace Quan_ly_sinh_vien
             MoForm(new FrmMonHoc());
         }
 
-        // =========================================================
+
         // SINH VIÊN
-        // =========================================================
+
         private void btnSinhVien_Click(object sender, EventArgs e)
         {
             MoForm(new FrmSinhVien());
@@ -227,9 +223,9 @@ namespace Quan_ly_sinh_vien
             MoForm(new FrmSinhVien());
         }
 
-        // =========================================================
+
         // KẾT QUẢ
-        // =========================================================
+
         private void btnKetQua_Click(object sender, EventArgs e)
         {
             MoForm(new FrmKetQua());

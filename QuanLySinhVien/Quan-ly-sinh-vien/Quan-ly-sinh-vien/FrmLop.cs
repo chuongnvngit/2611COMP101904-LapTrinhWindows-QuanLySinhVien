@@ -29,9 +29,9 @@ namespace Quan_ly_sinh_vien
             txtTimKiem.TextChanged += txtTimKiem_TextChanged;
         }
 
-        // =========================================================
+
         // LOAD FORM
-        // =========================================================
+
         private void FrmLop_Load(object sender, EventArgs e)
         {
             HienThiDanhSachKhoa();
@@ -39,9 +39,9 @@ namespace Quan_ly_sinh_vien
             LamMoi();
         }
 
-        // =========================================================
+
         // HIỂN THỊ DANH SÁCH KHOA
-        // =========================================================
+
         private void HienThiDanhSachKhoa()
         {
             try
@@ -63,9 +63,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // HIỂN THỊ DANH SÁCH LỚP
-        // =========================================================
+
         private void HienThiDanhSach()
         {
             try
@@ -103,9 +103,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // THÊM LỚP
-        // =========================================================
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -184,9 +184,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // CẬP NHẬT
-        // =========================================================
+
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
             try
@@ -228,9 +228,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // XÓA
-        // =========================================================
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMaLop.Text))
@@ -282,9 +282,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // LÀM MỚI
-        // =========================================================
+
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             HienThiDanhSach();
@@ -309,9 +309,9 @@ namespace Quan_ly_sinh_vien
             txtMaLop.Focus();
         }
 
-        // =========================================================
+
         // CLICK DÒNG
-        // =========================================================
+
         private void dgvLop_CellClick(
             object sender,
             DataGridViewCellEventArgs e)
@@ -348,9 +348,9 @@ namespace Quan_ly_sinh_vien
             txtMaLop.ReadOnly = true;
         }
 
-        // =========================================================
+
         // TÌM KIẾM
-        // =========================================================
+
         private void txtTimKiem_TextChanged(
             object sender,
             EventArgs e)
@@ -383,9 +383,9 @@ namespace Quan_ly_sinh_vien
             dgvLop.DataSource = view;
         }
 
-        // =========================================================
+
         // EVENT DO DESIGNER TẠO
-        // =========================================================
+
         private void lblMaLop_Click(
             object sender,
             EventArgs e)

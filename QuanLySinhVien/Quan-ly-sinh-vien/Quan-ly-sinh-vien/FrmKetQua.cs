@@ -33,9 +33,9 @@ namespace Quan_ly_sinh_vien
             dgvKetQua.BackgroundColor = Color.White;
         }
 
-        // =========================================================
+
         // NẠP DỮ LIỆU VÀO COMBOBOX
-        // =========================================================
+
         private void LoadComboBoxLop()
         {
             try
@@ -66,9 +66,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // NÚT LẤY DANH SÁCH NHẬP ĐIỂM
-        // =========================================================
+
         private void btnLayDanhSach_Click(object sender, EventArgs e)
         {
             try
@@ -109,9 +109,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // CLICK VÀO DATAGRIDVIEW ĐỂ ĐƯA LÊN Ô NHẬP
-        // =========================================================
+
         private void dgvKetQua_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -127,9 +127,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // NÚT LƯU ĐIỂM (INSERT HOẶC UPDATE TỰ ĐỘNG BẰNG SP)
-        // =========================================================
+
         private void btnLuuDiem_Click(object sender, EventArgs e)
         {
             try
@@ -171,9 +171,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // NÚT XEM BẢNG ĐIỂM CÁ NHÂN VÀ TÍNH GPA TỔNG HỢP HỆ 10 & HỆ 4
-        // =========================================================
+
         private void btnXemDiemCaNhan_Click(object sender, EventArgs e)
         {
             try
@@ -287,9 +287,9 @@ namespace Quan_ly_sinh_vien
             ppdInBangDiem.ShowDialog();
         }
 
-        // =========================================================
+
         // IN BẢNG ĐIỂM KÈM GPA HỆ 4 VÀ XẾP LOẠI 
-        // =========================================================
+
         private void pdInBangDiem_PrintPage(object sender, PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -405,9 +405,9 @@ namespace Quan_ly_sinh_vien
             e.HasMorePages = false;
         }
 
-        // =========================================================
+
         // BỘ CÔNG CỤ QUY ĐỔI ĐIỂM VÀ XẾP LOẠI HỌC VỤ
-        // =========================================================
+
         private decimal ChuyenDiemHe4(decimal diem10)
         {
             if (diem10 >= 8.5m) return 4.0m; // A

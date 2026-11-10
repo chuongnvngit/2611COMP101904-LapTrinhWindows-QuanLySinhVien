@@ -17,18 +17,18 @@ namespace Quan_ly_sinh_vien
             InitializeComponent();
         }
 
-        // =========================================================
+
         // FORM LOAD
-        // =========================================================
+
         private void FrmKhoa_Load(object sender, EventArgs e)
         {
             HienThiDanhSach();
             LamMoi();
         }
 
-        // =========================================================
+
         // HIỂN THỊ DANH SÁCH KHOA
-        // =========================================================
+
         private void HienThiDanhSach()
         {
             try
@@ -57,9 +57,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // THÊM KHOA
-        // =========================================================
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -129,9 +129,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // CẬP NHẬT KHOA
-        // =========================================================
+
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
             try
@@ -174,9 +174,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // XÓA KHOA
-        // =========================================================
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMaKhoa.Text))
@@ -235,9 +235,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // LÀM MỚI
-        // =========================================================
+
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             HienThiDanhSach();
@@ -257,9 +257,9 @@ namespace Quan_ly_sinh_vien
             txtMaKhoa.Focus();
         }
 
-        // =========================================================
+
         // CLICK VÀO DÒNG TRONG DATAGRIDVIEW
-        // =========================================================
+
         private void dgvKhoa_CellClick(
             object sender,
             DataGridViewCellEventArgs e)
@@ -285,9 +285,9 @@ namespace Quan_ly_sinh_vien
             txtMaKhoa.ReadOnly = true;
         }
 
-        // =========================================================
+
         // TÌM KIẾM KHOA
-        // =========================================================
+
         private void txtTimKiem_TextChanged(
             object sender,
             EventArgs e)
@@ -315,9 +315,9 @@ namespace Quan_ly_sinh_vien
             dgvKhoa.DataSource = view;
         }
 
-        // =========================================================
+
         // CÁC HÀM DO DESIGNER ĐÃ GẮN SỰ KIỆN
-        // =========================================================
+
 
         // Designer đang gọi hàm này ở dòng 53
         private void lblMaKhoa_Click(object sender, EventArgs e)

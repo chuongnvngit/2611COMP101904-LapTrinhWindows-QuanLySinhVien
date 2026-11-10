@@ -20,9 +20,9 @@ namespace Quan_ly_sinh_vien
             InitializeComponent();
         }
 
-        // =========================================================
+
         // 1. TẢI DỮ LIỆU KHI MỞ FORM
-        // =========================================================
+
         private void FrmSinhVien_Load_1(object sender, EventArgs e)
         {
             LoadData();
@@ -63,9 +63,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // 2. CHỨC NĂNG LÀM MỚI (XÓA TRẮNG CÁC Ô NHẬP)
-        // =========================================================
+
         private void btnLamMoi_Click_1(object sender, EventArgs e)
         {
             txtMaSV.Clear();
@@ -85,9 +85,9 @@ namespace Quan_ly_sinh_vien
             LoadData(); // Tải lại toàn bộ dữ liệu gốc
         }
 
-        // =========================================================
+
         // 3. HIỂN THỊ DỮ LIỆU KHI CLICK VÀO BẢNG
-        // =========================================================
+
         private void dgvSinhVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -129,9 +129,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // HÀM KIỂM TRA NHẬP LIỆU
-        // =========================================================
+
         private bool KiemTraNhapLieu()
         {
             if (string.IsNullOrWhiteSpace(txtMaSV.Text))
@@ -174,9 +174,9 @@ namespace Quan_ly_sinh_vien
             return true;
         }
 
-        // =========================================================
+
         // 4. CHỨC NĂNG THÊM SINH VIÊN
-        // =========================================================
+
         private void btnThem_Click_1(object sender, EventArgs e)
         {
             try
@@ -211,9 +211,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // 5. CHỨC NĂNG SỬA SINH VIÊN
-        // =========================================================
+
         private void btnSua_Click_1(object sender, EventArgs e)
         {
             try
@@ -247,9 +247,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // 6. CHỨC NĂNG XÓA SINH VIÊN
-        // =========================================================
+
         private void btnXoa_Click_1(object sender, EventArgs e)
         {
             try
@@ -278,9 +278,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // 7. CHỨC NĂNG TÌM KIẾM
-        // =========================================================
+
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
@@ -302,9 +302,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // 8. CHỨC NĂNG LỌC (Theo Khoa, Lớp, Khóa Học)
-        // =========================================================
+
         private void btnLoc_Click(object sender, EventArgs e)
         {
             try
@@ -423,9 +423,9 @@ private void pdInThe_PrintPage(object sender, PrintPageEventArgs e)
             e.HasMorePages = false;
         }
 
-        // =========================================================
+
         // HÀM HỖ TRỢ VẼ KHUNG TRỐNG KHI SINH VIÊN KHÔNG CÓ ẢNH
-        // =========================================================
+
         private void DrawEmptyPhotoBox(Graphics g, Rectangle rect)
         {
             g.FillRectangle(Brushes.WhiteSmoke, rect);

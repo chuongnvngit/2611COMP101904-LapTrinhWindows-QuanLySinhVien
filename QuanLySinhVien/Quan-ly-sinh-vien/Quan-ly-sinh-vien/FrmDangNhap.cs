@@ -14,9 +14,9 @@ namespace Quan_ly_sinh_vien
             InitializeComponent();
         }
 
-        // =====================================================
+
         // NÚT ĐĂNG NHẬP
-        // =====================================================
+
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             string tenDangNhap = txtTenDangNhap.Text.Trim();
@@ -71,9 +71,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =====================================================
+
         // NÚT HIỆN/ẨN MẬT KHẨU
-        // =====================================================
+
         private void btnHienMatKhau_Click(object sender, EventArgs e)
         {
             // Kiểm tra xem ô mật khẩu đang ẩn hay hiện
@@ -91,9 +91,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =====================================================
+
         // KHI FRMMAIN ĐÓNG
-        // =====================================================
+
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Xóa dữ liệu đăng nhập cũ
@@ -111,9 +111,9 @@ namespace Quan_ly_sinh_vien
             txtTenDangNhap.Focus();
         }
 
-        // =====================================================
+
         // NÚT THOÁT TRÊN FORM ĐĂNG NHẬP
-        // =====================================================
+
         private void btnThoat_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -129,9 +129,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =====================================================
+
         // CÁC EVENT CŨ CỦA DESIGNER
-        // =====================================================
+
         private void label1_Click(object sender, EventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
         private void button1_Click(object sender, EventArgs e) { }

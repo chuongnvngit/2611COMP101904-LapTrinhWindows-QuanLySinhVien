@@ -1,7 +1,7 @@
-﻿-- =============================================
+﻿
 -- HỆ THỐNG QUẢN LÝ SINH VIÊN (C# WinForms - SQL Server)
 -- Tệp: Scripts/Database.sql
--- =============================================
+
 
 USE master;
 GO
@@ -20,9 +20,9 @@ IF COL_LENGTH('SINHVIEN', 'HinhAnh') IS NULL
     ALTER TABLE SINHVIEN ADD HinhAnh NVARCHAR(255) NULL;
 GO
 
--- =============================================
+
 -- 1. TẠO CÁC BẢNG DỮ LIỆU
--- =============================================
+
 
 -- Bảng Khoa
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Khoa')
@@ -135,9 +135,9 @@ BEGIN
 END
 GO
 
--- =============================================
+
 -- 2. STORED PROCEDURES
--- =============================================
+
 
 CREATE OR ALTER PROCEDURE sp_KiemTraDangNhap
     @TenDangNhap VARCHAR(50),
@@ -292,9 +292,9 @@ END;
 ');
 GO
 
--- =============================================
+
 -- 3. DỮ LIỆU MẪU
--- =============================================
+
 
 -- 3.1. Tài khoản
 IF NOT EXISTS (SELECT 1 FROM TaiKhoan WHERE TenDangNhap = 'admin')
@@ -414,9 +414,9 @@ FROM @ListSV src
 WHERE NOT EXISTS (SELECT 1 FROM SinhVien WHERE MaSV = src.MaSV);
 GO
 
--- =============================================
+
 -- 3.6. BỔ SUNG DỮ LIỆU ĐIỂM SỐ MẪU
--- =============================================
+
 
 -- Sinh viên K47
 IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV001' AND MaMH = 'COMP1019')
@@ -519,9 +519,9 @@ IF NOT EXISTS (SELECT 1 FROM KetQua WHERE MaSV = 'SV5106' AND MaMH = 'CHEM1001')
     INSERT INTO KetQua VALUES ('SV5106', 'CHEM1001', 7.70);
 GO
 
--- =============================================
+
 -- 4. KIỂM TRA DỮ LIỆU & THỦ TỤC
--- =============================================
+
 
 PRINT N'=============================================';
 PRINT N'CẬP NHẬT CSDL QLSinhVien THÀNH CÔNG!';

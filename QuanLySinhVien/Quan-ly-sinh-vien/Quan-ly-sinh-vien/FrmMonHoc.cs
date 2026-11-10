@@ -17,18 +17,18 @@ namespace Quan_ly_sinh_vien
             InitializeComponent();
         }
 
-        // =========================================================
+
         // LOAD FORM
-        // =========================================================
+
         private void FrmMonHoc_Load(object sender, EventArgs e)
         {
             HienThiDanhSach();
             LamMoi();
         }
 
-        // =========================================================
+
         // HIỂN THỊ DANH SÁCH MÔN HỌC
-        // =========================================================
+
         private void HienThiDanhSach()
         {
             try
@@ -70,9 +70,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // THÊM MÔN HỌC
-        // =========================================================
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -172,9 +172,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // CẬP NHẬT MÔN HỌC
-        // =========================================================
+
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
             try
@@ -272,9 +272,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // XÓA MÔN HỌC
-        // =========================================================
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMaMH.Text))
@@ -334,9 +334,9 @@ namespace Quan_ly_sinh_vien
             }
         }
 
-        // =========================================================
+
         // LÀM MỚI
-        // =========================================================
+
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             HienThiDanhSach();
@@ -357,9 +357,9 @@ namespace Quan_ly_sinh_vien
             txtMaMH.Focus();
         }
 
-        // =========================================================
+
         // CLICK VÀO DÒNG TRONG DATAGRIDVIEW
-        // =========================================================
+
         private void dgvMonHoc_CellClick(
             object sender,
             DataGridViewCellEventArgs e)
@@ -391,9 +391,9 @@ namespace Quan_ly_sinh_vien
             txtMaMH.ReadOnly = true;
         }
 
-        // =========================================================
+
         // TÌM KIẾM
-        // =========================================================
+
         private void txtTimKiem_TextChanged(
             object sender,
             EventArgs e)
@@ -428,9 +428,9 @@ namespace Quan_ly_sinh_vien
             dgvMonHoc.DataSource = view;
         }
 
-        // =========================================================
+
         // CÁC EVENT CÓ THỂ ĐƯỢC DESIGNER TẠO
-        // =========================================================
+
         private void lblTieuDe_Click(
             object sender,
             EventArgs e)
